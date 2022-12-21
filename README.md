@@ -7,11 +7,16 @@ In order to compute from amino acids molecular weight the putative oligomers of 
 
 ## Install Package locally
 
-```
-library("devtools")
-library("roxygen2")
+
+```R
+# if necessary...
+install.packages(devtools)
+install.packages(roxygen2)
+
+library(devtools)
+library(roxygen2)
 document()
-install(".")
+install()
 ```
 
 ## Help 
@@ -52,7 +57,16 @@ show(oligopeptides)
 
 
 ```R
+# if necessary...
 install.packages("shiny")
+install.packages("DT")
+
 library(shiny)
+library(DT)
+
+library(devtools)
+library(roxygen2)
+document()
+install()
 runApp("exampleOligopeptidesMatching")
 ```
