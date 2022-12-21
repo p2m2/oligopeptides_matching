@@ -14,9 +14,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install package dependencies
-          command: R -e "install.packages('devtools');install.packages('roxygen2')"
-      - run:
           name: Build package
           command: R CMD build .
       - run:
