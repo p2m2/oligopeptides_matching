@@ -12,7 +12,7 @@ Authors@R: c(
            email = "olivier.filangi@inrae.fr",
            role = "aut",
            comment = c(ORCID = "0000-0002-2094-3271")))
-Depends: R (>= 3.2)
+Depends: R (>= 3.5)
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
