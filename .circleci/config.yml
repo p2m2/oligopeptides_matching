@@ -10,7 +10,7 @@ workflows:
 jobs:
   build:
     docker:
-      - image: rocker/r-base:4.2.2
+      - image: appsilon/ci-base:1.0
     steps:
       - checkout
       - run:
