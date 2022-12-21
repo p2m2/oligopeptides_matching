@@ -1,8 +1,16 @@
-version: 2
+version: 2.1
+orbs:
+  node: circleci/node@5.0.3
+workflows:
+  compile-workflow:
+    jobs:
+      - build:
+          context:
+            - DOCKER_CONTEXT
 jobs:
   build:
     docker:
-      - image: rocker/verse:3.5.3
+      - image: r-base:4.2.2
     steps:
       - checkout
       - run:
