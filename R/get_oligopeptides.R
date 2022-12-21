@@ -12,13 +12,18 @@
 #' 
 #' 
 #' @param aminoacids list of amino acids.
-#' @param chemical_reaction 
-#' @param ionization : list of ionization
+#' @param chemical_reaction reaction linking the combination of oligopepid and amino acids. 
+#' @param ionization list of ionization
 #' @param oligomerization_degree integer : oligomerization degree  
 #' @return matrix containing OD, Id , Mz , ([M - Xionization ], [M + Xionization])+ .
 #' @export
 #' @examples 
-#' get_oligopeptides(aminoacids = aa1_mw,chemical_reaction = H2O,ionization = setNames(c(H),c("H")),oligomerization_degree = 4)
+#' get_oligopeptides(
+#'  aminoacids = setNames(c(89.047679),
+#'  c("A")),
+#'  chemical_reaction = 18.010565,
+#'  ionization = setNames(c(1.007825),c("H")),
+#'  oligomerization_degree = 4)
 get_oligopeptides <- function(aminoacids,
                               chemical_reaction,
                               ionization,

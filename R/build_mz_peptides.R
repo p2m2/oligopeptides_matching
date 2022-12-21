@@ -1,4 +1,4 @@
-#' Builds an informative matrix of Oligopeptides mapping to Mass Spectrometry outpt
+#' Builds an informative matrix of Oligopeptides mapping to Mass Spectrometry output
 #'
 #' Builds a matrix containing : 
 #'  - Oligomerization Degree
@@ -17,7 +17,7 @@
 #' @return matrix containing OD, Id , Mz , ([M - Xionization ], [M + Xionization])+ .
 #' @export
 #' @examples 
-#' build_mz_peptides(dipeptide, 2, setNames(c(1.007825),c("H")))
+#' build_mz_peptides(setNames(c(160.0848,192.0569),c("A_A","A_C")), 2, setNames(c(1.007825),c("H")))
 build_mz_peptides <- function(peptide,
                               oligomerization_degree,
                               ionization){

@@ -2,7 +2,16 @@ Package: oligopeptidesMatching
 Title: Library of functions for in silico construction and detection of oligopeptides
 Description: In order to compute from amino acids molecular weight the putative oligomers of various oligomerization degree
 Version: 0.0.1
-Authors@R: person("Kevin", "Billet", email = "kevin.billet@inrae.fr", role = c("aut", "cre"))
+Authors@R: c(
+    person(given = "Kevin",
+           family = "Billet",
+           role = c("aut", "cre"),
+           email = "kevin.billet@inrae.fr"),
+    person(given = "Olivier",
+           family = "Filangi",
+           email = "olivier.filangi@inrae.fr",
+           role = "aut",
+           comment = c(ORCID = "0000-0002-2094-3271")))
 Depends: R (>= 3.6.3)
 License: `use_mit_license()`
 Encoding: UTF-8
