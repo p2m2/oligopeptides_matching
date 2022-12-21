@@ -1,0 +1,32 @@
+version: 2.1
+orbs:
+  node: circleci/node@5.0.3
+workflows:
+  compile-workflow:
+    jobs:
+      - build:
+          context:
+            - DOCKER_CONTEXT
+jobs:
+  build:
+    docker:
+      - image: inraep2m2/ci-r-base-devtools:4.2.2
+    steps:
+      - checkout
+      - run:
+          name: Install package dependencies
+          command: R -e 'devtools::install_deps(dependencies = TRUE)'
+      - run:
+          name: Check package
+          command: R -e 'devtools::check()'
+#      Probleme de generation du PDF avec le "R CMD check *tar.gz"
+#      todo: ajouter la bonne lib dans inraep2m2/ci-r-base-devtools
+#      - run:
+#          name: Build package
+#          command: R CMD build .
+#      - run:
+#          name: Check package
+#          command: R CMD check *tar.gz
+      - store_artifacts:
+          path: man/
+          destination: man
