@@ -14,7 +14,7 @@
 #' @return new oligo_vector with mass values .
 #' @export
 #' @examples 
-#' oligopeptides_building(setNames(c(160,085358),c("A-A")),setNames(c(89.047679),c("A")),H2O)
+#' oligopeptides_building(setNames(c(160,085358),c("A-A")),setNames(c(89.047679),c("A")),18.010565)
 oligopeptides_building <- function(mass_oligo_vector_np1,
                                    mass_aa_vector,
                                    additional_reaction){
@@ -29,7 +29,7 @@ oligopeptides_building <- function(mass_oligo_vector_np1,
   for (i in 1:m){
     for (j in 1:n){
       nameOligo <- names(mass_oligo_vector_np1)[i]
-      l <- str_sort(append(unlist(str_split(nameOligo, "_")),names(mass_aa_vector)[j]))
+      l <- stringr::str_sort(append(unlist(stringr::str_split(nameOligo, "_")),names(mass_aa_vector)[j]))
 
       oligo_names[k]=paste(l, collapse="_")
       oligo_mass[k]=mass_oligo_vector_np1[i]+mass_aa_vector[j]-additional_reaction

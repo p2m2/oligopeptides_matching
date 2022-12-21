@@ -7,3 +7,4 @@ devel.md$
 ^\.Rproj\.user$
 ^.*\.Rproj$
 ^\.circleci\.yml$
+^LICENSE\.md$
