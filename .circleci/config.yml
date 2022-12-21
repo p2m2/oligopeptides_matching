@@ -17,11 +17,16 @@ jobs:
           name: Install package dependencies
           command: R -e 'devtools::install_deps(dependencies = TRUE)'
       - run:
-          name: Build package
-          command: R -e 'devtools::check()'
-      - run:
           name: Check package
-          command: R CMD check *tar.gz
+          command: R -e 'devtools::check()'
+#      Probleme de generation du PDF avec le "R CMD check *tar.gz"
+#      todo: ajouter la bonne lib dans inraep2m2/ci-r-base-devtools
+#      - run:
+#          name: Build package
+#          command: R CMD build .
+#      - run:
+#          name: Check package
+#          command: R CMD check *tar.gz
       - store_artifacts:
           path: man/
           destination: man
