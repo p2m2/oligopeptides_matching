@@ -14,8 +14,14 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install package dependencies
+          command: R -e 'devtools::install_deps(dependencies = TRUE)'
+      - run:
           name: Build package
-          command: R CMD build .
+          command: R -e 'devtools::check()'
       - run:
           name: Check package
           command: R CMD check *tar.gz
+      - store_artifacts:
+          path: man/
+          destination: man
