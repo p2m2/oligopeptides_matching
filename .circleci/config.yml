@@ -10,7 +10,7 @@ workflows:
 jobs:
   build:
     docker:
-      - image: r-base:4.2.2
+      - image: rocker/r-base:4.2.2
     steps:
       - checkout
       - run:
