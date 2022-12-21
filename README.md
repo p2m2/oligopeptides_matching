@@ -1,5 +1,7 @@
 # oligopeptides_matching
 
+[![p2m2](https://circleci.com/gh/p2m2/oligopeptides_matching.svg?style=shield)](https://app.circleci.com/pipelines/github/p2m2)
+
 In order to compute from amino acids molecular weight the putative oligomers of various oligomerization degree
 
 
@@ -44,4 +46,13 @@ oligopeptides <- get_oligopeptides(aminoacids = aa1_mw,
 
 show(oligopeptides)
 
+```
+
+## R Shiny
+
+
+```R
+install.packages("shiny")
+library(shiny)
+runApp("exampleOligopeptidesMatching")
 ```

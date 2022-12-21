@@ -10,7 +10,7 @@ workflows:
 jobs:
   build:
     docker:
-      - image: appsilon/ci-base:1.0
+      - image: inraep2m2/ci-r-base-devtools:4.2.2
     steps:
       - checkout
       - run:
