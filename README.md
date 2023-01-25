@@ -52,6 +52,33 @@ show(oligopeptides)
 
 ```
 
+## Example 2 : combination amino acids and polyphenols 
+
+```R
+
+# Constants
+### polyphenol list
+polyphenol <- c("Cyanidin",
+                "Cyanidin 3,5-O-diglucoside",
+                "Cyanidin 3-O-(6''-acetyl-galactoside)",
+                "Cyanidin 3-O-(6''-acetyl-glucoside)",
+                "Cyanidin 3-O-(6''-caffeoyl-glucoside)")
+
+### polyphenol molecular weight
+mass_polyphenol <- c(287.244, 611.525,491.422, 491.422, 611.527)
+
+pp_mw <- setNames(mass_polyphenol, polyphenol)
+
+aa <- c(oligopeptides$id)
+aa_mass <- c(oligopeptides$MW)
+aa_mw <- setNames(aa_mass, aa)
+
+get_combination_compounds(compounds_1 = aa_mw, 
+                          compounds_2 = pp_mw, 
+                          chemical_reaction = H2O, 
+                          ionization = setNames(c(H),c("H")))
+```
+
 ## R Shiny
 
 

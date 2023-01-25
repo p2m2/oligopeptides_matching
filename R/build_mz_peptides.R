@@ -11,7 +11,7 @@
 #'  - ...
 #' 
 #' 
-#' @param peptide list of oligopeptide.
+#' @param peptide list of oligopeptide, Named num (column with names)
 #' @param oligomerization_degree integer : oligomerization degree  
 #' @param ionization : list of ionization
 #' @return a data.frame containing OD, Id , Mz , ([M - Xionization ], [M + Xionization])+ .
