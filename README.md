@@ -17,6 +17,11 @@ library(roxygen2)
 document()
 install()
 ```
+### Reload case
+
+```R
+document()
+```
 
 ## Help 
 
@@ -81,6 +86,7 @@ get_combination_compounds(compounds_1 = aa_mw,
 
 ## R Shiny
 
+### Running example
 
 ```R
 # if necessary...
@@ -93,6 +99,10 @@ library(DT)
 library(devtools)
 library(roxygen2)
 document()
-install()
-runApp("exampleOligopeptidesMatching")
+runApp("exampleOligopeptidesMatching_aa")
 ```
+
+### Examples
+- [search for amino acid combination](exampleOligopeptidesMatching_aa)
+- [search for amino acids/oligopeptides and polyphenols combination](exampleOligopeptidesMatching_aa_and_polyphenols)
+
