@@ -7,6 +7,9 @@
 #' @export
 #' @examples for the glucose in negative ionization mode: d_ppm(179.0564, 179.0561)
 d_ppm <- function(mz_obs, mz_theoric){
+  if(mz_theoric==0){
+    return(0)
+  }
   ppm_error <- abs(((mz_obs - mz_theoric) / mz_theoric) * 10^6)
   return(ppm_error)
 }
