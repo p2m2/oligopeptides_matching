@@ -23,6 +23,8 @@ for (i in 1:n){
 combined_compounds <- (stats::setNames(combined_compounds_mass,combined_compounds_names))
 combined_compounds <- combined_compounds[unique(names(combined_compounds))]
 
-return(as.data.frame(combined_compounds))
+df <- as.data.frame(combined_compounds)
+df[order(df$combined_compounds)]
+return(df)
 }
 

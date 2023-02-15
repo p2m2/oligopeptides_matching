@@ -7,10 +7,7 @@
 #' @export
 #' @examples 
 
-mz_obs <- c(403.1235, 682.5621, 358.2813)
-
-
-
+# mz_obs <- c(403.1235, 682.5621, 358.2813)
 
 mz_matching <- function(combined_compounds,
                         mz_obs,
@@ -38,34 +35,4 @@ mz_matching <- function(combined_compounds,
 
 
 
-test <- mz_matching(combined_compounds,
-                    mz_obs)
-
-
-
-# mz_theoric <- as.vector(combined_compounds$combined_compounds)
-# # mz_theoric <- head(mz_theoric)
-# mz_obs <- as.vector(mz_obs)
-
-# mz_matching <- matrix(nrow=length(mz_obs), ncol=length(mz_theoric))
-# rownames(mz_matching) <- mz_obs
-# colnames(mz_matching) <- mz_theoric
-
-# initiate the loop
-a=1
-b=1
-
-# set the tolerance in ppm
-tolerance = 5
-
-# loop
-for (i in 1:length(mz_theoric)){
-  for (j in 1:length(mz_obs)){
-    mz_matching= d_ppm(mz_obs = mz_obs[j],
-                       mz_theoric = mz_theoric[i])
-    mz_matching[b,a]=mz_matching
-    b=b+1
-  }
-  a=a+1
-  b=1
-}
+# test <- mz_matching(combined_compounds, mz_obs)
