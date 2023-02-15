@@ -38,7 +38,7 @@ mz_matching <- function(combined_compounds,
 
 
 
-test <- mz_matching(head(combined_compounds),
+test <- mz_matching(combined_compounds,
                     mz_obs)
 
 
