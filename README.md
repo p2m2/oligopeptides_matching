@@ -83,6 +83,14 @@ get_combination_compounds(compounds_1 = aa_mw,
                           chemical_reaction = H2O, 
                           ionization = setNames(c(H),c("H")))
 ```
+## Example 3 : match a mz_obs with the caculated list 
+
+```R
+
+mz_obs <- 414.8986
+test <- match_mz_obs(mz_obs, combined_compounds, ppm_error = 700)
+
+```
 
 ## R Shiny
 
