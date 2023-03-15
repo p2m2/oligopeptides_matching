@@ -8,3 +8,6 @@ devel.md$
 ^.*\.Rproj$
 ^\.circleci\.yml$
 ^LICENSE\.md$
+.circleci
+exampleOligopeptides*
+Data

@@ -78,7 +78,7 @@ aa <- c(oligopeptides$id)
 aa_mass <- c(oligopeptides$MW)
 aa_mw <- setNames(aa_mass, aa)
 
-get_combination_compounds(compounds_1 = aa_mw, 
+combined_compounds <- get_combination_compounds(compounds_1 = aa_mw, 
                           compounds_2 = pp_mw, 
                           chemical_reaction = H2O, 
                           ionization = setNames(c(H),c("H")))
