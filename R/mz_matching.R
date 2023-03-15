@@ -2,16 +2,12 @@
 #'
 #' @description Calculate the δppm between an observed mz and a theorical one
 #' @param mz_obs is the observed mz of the metabolomic study
-#' @param mz_theoric is the theorical mz (calculated by get_arrangement_oligopeptides and or get_combination_compounds)
-#' @return the δppm of the difference between the mz observed and a theorical one
+#' @return δppm of the difference between the mz observed and a theorical one
 #' @export
-#' @examples 
-
-# mz_obs <- c(403.1235, 682.5621, 358.2813)
 
 mz_matching <- function(combined_compounds,
                         mz_obs,
-                        tolerance=5){
+                        tolerance=5) {
   df_theoric_obs_dppm <- data.frame(id=c(),
                                     mz_theoric=c(),
                                     mz_obs=c(),
@@ -34,5 +30,3 @@ mz_matching <- function(combined_compounds,
   }
 
 
-
-# test <- mz_matching(combined_compounds, mz_obs)

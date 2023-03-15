@@ -26,13 +26,12 @@
 get_oligopeptides <- function(aminoacids,
                               chemical_reaction,
                               ionization,
-                              oligomerization_degree) {
+                              oligomerization_degree){
   tmp_oligopeptides <- aminoacids
   all_mz_peptides <-  build_mz_peptides(aminoacids, 1, ionization)
   for (i in 1:(oligomerization_degree-1)){
-    tmp_oligopeptides <- oligopeptides_building(tmp_oligopeptides,
-                          aminoacids, chemical_reaction)
-    tmp_mz_peptides <- build_mz_peptides(tmp_oligopeptides, i + 1, ionization)
+    tmp_oligopeptides <- oligopeptides_building(tmp_oligopeptides, aminoacids, chemical_reaction)
+    tmp_mz_peptides <- build_mz_peptides(tmp_oligopeptides, i+1, ionization)
     all_mz_peptides <- rbind(all_mz_peptides, tmp_mz_peptides)
   }
   return(all_mz_peptides)
