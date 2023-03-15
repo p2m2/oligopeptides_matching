@@ -2,6 +2,10 @@
 
 export(build_mz_peptides)
 export(d_ppm)
+export(get_combination_compounds)
 export(get_oligopeptides)
-export(mz_matching)
+export(match_mz_obs)
 export(oligopeptides_building)
+importFrom(dplyr,"%>%")
+importFrom(dplyr,filter)
+importFrom(dplyr,mutate)

@@ -1,23 +1,20 @@
-#' Builds an informative matrix of Oligopeptides mapping to Mass Spectrometry output
+#' Builds an informative matrix of Oligopeptides mapping to
+#' Mass Spectrometry output
 #'
 #' Builds a matrix containing : 
 #'  - Oligomerization Degree
 #'  - Id (Combinaison of Amino Acid names)
 #'  - Mz (ionized mass)
-#'  - [M - X ionization[1]] negative mode ionization
-#'  - [M + X ionization[1]] positive mode ionization 
-#'  - [M - X ionization[2]] negative mode ionization
-#'  - [M + X ionization[2]] positive mode ionization 
-#'  - ...
-#' 
-#' 
 #' @param peptide list of oligopeptide, Named num (column with names)
 #' @param oligomerization_degree integer : oligomerization degree  
 #' @param ionization : list of ionization
-#' @return a data.frame containing OD, Id , Mz , ([M - Xionization ], [M + Xionization])+ .
+#' @return a data.frame containing OD, Id , Mz ,
+#' M + Xionization, M - Xionization
 #' @export
-#' @examples 
-#' build_mz_peptides(stats::setNames(c(160.0848,192.0569),c("A_A","A_C")), 2, stats::setNames(c(1.007825),c("H")))
+#' @examples
+#' build_mz_peptides(
+#' stats::setNames(c(160.0848,192.0569),c("A_A","A_C")), 2,
+#' stats::setNames(c(1.007825),c("H")))
 build_mz_peptides <- function(peptide,
                               oligomerization_degree,
                               ionization){
