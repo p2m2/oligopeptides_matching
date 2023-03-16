@@ -37,6 +37,7 @@ jobs:
             R CMD build --no-manual .
             R CMD check --no-manual ${NAMEPACKAGE}_${VERSION}.tar.gz
             mkdir -p workspace
+            mv ${NAMEPACKAGE}_${VERSION}.tar.gz workspace/
 
       - persist_to_workspace:
           root: workspace
