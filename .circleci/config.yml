@@ -42,8 +42,10 @@ jobs:
       - persist_to_workspace:
           root: workspace
           paths: 
-            - ${NAMEPACKAGE}_${VERSION}.tar.gz
+            - .
+  
   publish-github-release:
+    working_directory: ~/tmp
     docker:
       - image: circleci/golang:1.17
     steps:
@@ -69,5 +71,5 @@ jobs:
                   -c ${CIRCLE_SHA1} \
                   -n $VERSION \
                   -b "$BODY" \
-                  -delete $VERSION ${NAMEPACKAGE}_${VERSION}.tar.gz
+                  -delete $VERSION workspace/${NAMEPACKAGE}_${VERSION}.tar.gz
             fi
