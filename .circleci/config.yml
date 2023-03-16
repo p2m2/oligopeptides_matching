@@ -10,7 +10,7 @@ workflows:
 jobs:
   build:
     docker:
-      - image: rocker/verse:4.2.3
+      - image: inraep2m2/ci-r-base-devtools:4.2.2
     steps:
       - checkout
       - run:
@@ -23,10 +23,10 @@ jobs:
 #      todo: ajouter la bonne lib dans inraep2m2/ci-r-base-devtools
       - run:
           name: Build package
-          command: R CMD build .
+          command: R CMD build --no-manual .
       - run:
           name: Check package
-          command: R CMD check *tar.gz
+          command: R CMD check --no-manual *tar.gz
       - store_artifacts:
           path: man/
           destination: man
