@@ -18,15 +18,12 @@ jobs:
           command: R -e 'devtools::install_deps(dependencies = TRUE)'
       - run:
           name: Check package
-          command: R -e 'devtools::check()'
-#      Probleme de generation du PDF avec le "R CMD check *tar.gz"
-#      todo: ajouter la bonne lib dans inraep2m2/ci-r-base-devtools
-      - run:
-          name: Build package
-          command: R CMD build --no-manual .
-      - run:
-          name: Check package
-          command: R CMD check --no-manual *tar.gz
+          command: |
+            R -e 'devtools::check()'
+            export NAMEPACKAGE=$(grep Package DESCRIPTION | awk '{print $2}')
+            export VERSION=$(grep Version DESCRIPTION | awk '{print $2}')
+            R CMD build --no-manual .
+            R CMD check --no-manual ${NAMEPACKAGE}_${VERSION}.tar.gz
       - store_artifacts:
-          path: man/
-          destination: man
+          path: .
+          destination: ${NAMEPACKAGE}_${VERSION}.tar.gz

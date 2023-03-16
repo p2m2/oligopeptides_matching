@@ -6,7 +6,13 @@ In order to compute from amino acids molecular weight the putative oligomers of 
 
 ## Install Package locally
 
+### from github repository
 
+```R
+devtools::install_github("p2m2/oligopeptides_matching")
+```
+
+### from source code
 ```R
 # if necessary...
 install.packages(devtools)
