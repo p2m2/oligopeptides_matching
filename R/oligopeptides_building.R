@@ -13,6 +13,8 @@
 #' @param additional_reaction additional reaction linking the 
 #' combination of oligopepid and amino acids.
 #' @return new oligo_vector with mass values .
+#' @importFrom stringr str_split
+#' @importFrom stringr str_sort
 #' @export
 #' @examples
 #' oligopeptides_building(stats::setNames(c(160,085358),
