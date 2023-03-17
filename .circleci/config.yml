@@ -50,6 +50,8 @@ jobs:
       - image: circleci/golang:1.17
     steps:
       - checkout
+      - node/install:
+          node-version: '19.6'
       - attach_workspace:
           at: workspace
       - run:
@@ -64,6 +66,8 @@ jobs:
             # -------------------------------------------------------
             if [ "LAST_VERSION" != "VERSION" ]; then
               go get github.com/tcnksm/ghr
+              npm i generate-changelog -g
+              mv build/package.json .
               BODY=$(changelog -a -f -)
               ghr -t ${GITHUB_TOKEN} \
                   -u ${CIRCLE_PROJECT_USERNAME} \
