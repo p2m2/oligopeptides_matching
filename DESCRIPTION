@@ -1,4 +1,4 @@
-Package: oligopeptidesMatching
+Package: oligopeptides_matching
 Title: Library of functions for in silico construction and detection of oligopeptides
 Description: In order to compute from amino acids molecular weight the putative oligomers of various oligomerization degree.
 Version: 0.0.1
