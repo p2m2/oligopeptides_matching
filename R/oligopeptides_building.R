@@ -2,19 +2,23 @@
 #'
 #' Builds an N-size amino acid oligopeptide list from the combination between 
 #' an N-size oligopeptide and an amino acid list
-#' 
+#'
 #' All vectors are named with a combination of amino acids. 
 #' the values ​​correspond to the theoretical mass.
-#' 
+#'
 #' Formula : oligo^n = aa^n - H2O^n-1 
-#' 
+#'
 #' @param mass_oligo_vector_np1 list of oligopeptide.
 #' @param mass_aa_vector list of amino acids.
-#' @param additional_reaction additional reaction linking the combination of oligopepid and amino acids.
+#' @param additional_reaction additional reaction linking the 
+#' combination of oligopepid and amino acids.
 #' @return new oligo_vector with mass values .
+#' @importFrom stringr str_split
+#' @importFrom stringr str_sort
 #' @export
-#' @examples 
-#' oligopeptides_building(stats::setNames(c(160,085358),c("A-A")),stats::setNames(c(89.047679),c("A")),18.010565)
+#' @examples
+#' oligopeptides_building(stats::setNames(c(160,085358),
+#' c("A-A")),stats::setNames(c(89.047679),c("A")),18.010565)
 oligopeptides_building <- function(mass_oligo_vector_np1,
                                    mass_aa_vector,
                                    additional_reaction){
