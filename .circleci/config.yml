@@ -66,9 +66,7 @@ jobs:
             # -------------------------------------------------------
             if [ "LAST_VERSION" != "VERSION" ]; then
               go get github.com/tcnksm/ghr
-              npm i generate-changelog -g
-              mv build/package.json .
-              BODY=$(changelog -a -f -)
+              BODY="# ${NAMEPACKAGE} ${VERSION}"
               ghr -t ${GITHUB_TOKEN} \
                   -u ${CIRCLE_PROJECT_USERNAME} \
                   -r ${CIRCLE_PROJECT_REPONAME} \
