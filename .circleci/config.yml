@@ -12,12 +12,25 @@ workflows:
             - build
           context:
             - DOCKER_CONTEXT
-            - CREDENTIAL_CONTEXT
             - GITHUB_CONTEXT
           filters:
             branches:
               only:
+                - main
+      - publish-shinyapp:
+          requires:
+            - build
+          context:
+            - DOCKER_CONTEXT
+            - SHINYAPP_CONTEXT
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              only:
+                - develop
                 - fix_import_stringr
+          
 jobs:
   build:
     working_directory: ~/tmp
@@ -73,3 +86,14 @@ jobs:
                   -b "$BODY" \
                   -delete $VERSION workspace/${NAMEPACKAGE}_${VERSION}.tar.gz
             fi
+
+  publish-shinyapp:
+    docker:
+      - image: inraep2m2/ci-r-base-devtools:4.2.3
+    steps:
+      - checkout
+      - run:
+          name: deployment on https://www.shinyapps.io/
+          command: |
+            [ -z "${CIRCLE_TAG}" ] && APP_NAME=${CIRCLE_BRANCH} || APP_NAME="oligopeptides_matching"
+            ./publish_rshinyapp.sh
