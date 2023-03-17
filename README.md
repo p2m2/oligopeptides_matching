@@ -109,12 +109,11 @@ install.packages("shiny")
 install.packages("DT")
 
 library(shiny)
-library(DT)
 
 library(devtools)
 library(roxygen2)
 document()
-runApp("exampleOligopeptidesMatching_aa")
+runApp("oligopeptides_matching")
 ```
 
 ### Examples
