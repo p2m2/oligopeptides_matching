@@ -1,12 +1,19 @@
 # oligopeptides_matching
 
 [![p2m2](https://circleci.com/gh/p2m2/oligopeptides_matching.svg?style=shield)](https://app.circleci.com/pipelines/github/p2m2)
+[![](https://img.shields.io/badge/Shiny-shinyapps.io-blue?style=flat&labelColor=white&logo=RStudio&logoColor=blue)](https://p2m2.shinyapps.io/oligopeptides_matching/)
 
 In order to compute from amino acids molecular weight the putative oligomers of various oligomerization degree
 
 ## Install Package locally
 
+### from github repository
 
+```R
+devtools::install_github("p2m2/oligopeptides_matching")
+```
+
+### from source code
 ```R
 # if necessary...
 install.packages(devtools)

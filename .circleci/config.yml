@@ -7,10 +7,33 @@ workflows:
       - build:
           context:
             - DOCKER_CONTEXT
+      - publish-github-release:
+          requires:
+            - build
+          context:
+            - DOCKER_CONTEXT
+            - GITHUB_CONTEXT
+          filters:
+            branches:
+              only:
+                - main
+      - publish-shinyapp:
+          requires:
+            - build
+          context:
+            - DOCKER_CONTEXT
+            - SHINYAPP_CONTEXT
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              only:
+                - develop
 jobs:
   build:
+    working_directory: ~/tmp
     docker:
-      - image: inraep2m2/ci-r-base-devtools:4.2.2
+      - image: inraep2m2/ci-r-base-devtools:4.2.3
     steps:
       - checkout
       - run:
@@ -18,15 +41,60 @@ jobs:
           command: R -e 'devtools::install_deps(dependencies = TRUE)'
       - run:
           name: Check package
-          command: R -e 'devtools::check()'
-#      Probleme de generation du PDF avec le "R CMD check *tar.gz"
-#      todo: ajouter la bonne lib dans inraep2m2/ci-r-base-devtools
-#      - run:
-#          name: Build package
-#          command: R CMD build .
-#      - run:
-#          name: Check package
-#          command: R CMD check *tar.gz
-      - store_artifacts:
-          path: man/
-          destination: man
+          command: |
+            R -e 'devtools::check()'
+            NAMEPACKAGE=$(grep Package DESCRIPTION | awk '{print $2}')
+            VERSION=$(grep Version DESCRIPTION | awk '{print $2}')
+            R CMD build --no-manual .
+            R CMD check --no-manual ${NAMEPACKAGE}_${VERSION}.tar.gz
+            mkdir -p workspace
+            mv ${NAMEPACKAGE}_${VERSION}.tar.gz workspace/
+
+      - persist_to_workspace:
+          root: workspace
+          paths: 
+            - .
+  
+  publish-github-release:
+    working_directory: ~/tmp
+    docker:
+      - image: circleci/golang:1.17
+    steps:
+      - checkout
+      - attach_workspace:
+          at: workspace
+      - run:
+          name: "Publish Release on GitHub"
+          command: |
+            LAST_VERSION=$(git ls-remote --tags --sort="v:refname" https://${GITHUB_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}.git | tail -n1  | sed 's/.*\///; s/\^{}//') 
+            NAMEPACKAGE=$(grep Package DESCRIPTION | awk '{print $2}')
+            VERSION=$(grep Version DESCRIPTION | awk '{print $2}')
+            # -------------------------------------------------------
+            # utiliser gh ? => https://github.com/cli/cli/blob/trunk/docs/install_linux.md
+            #                  https://cli.github.com/manual/gh_release_create
+            # -------------------------------------------------------
+            if [ "LAST_VERSION" != "VERSION" ]; then
+              go get github.com/tcnksm/ghr
+              BODY="# ${NAMEPACKAGE} ${VERSION}"
+              ghr -t ${GITHUB_TOKEN} \
+                  -u ${CIRCLE_PROJECT_USERNAME} \
+                  -r ${CIRCLE_PROJECT_REPONAME} \
+                  -c ${CIRCLE_SHA1} \
+                  -n $VERSION \
+                  -b "$BODY" \
+                  -delete $VERSION workspace/${NAMEPACKAGE}_${VERSION}.tar.gz
+            fi
+
+  publish-shinyapp:
+    docker:
+      - image: inraep2m2/ci-r-base-devtools:4.2.3
+    steps:
+      - checkout
+      - run:
+          name: Install package dependencies
+          command: R -e 'devtools::install_deps(dependencies = TRUE)'
+      - run:
+          name: deployment on https://www.shinyapps.io/
+          command: |
+            [ -z "${CIRCLE_TAG}" ] && export APP_NAME="${CIRCLE_PROJECT_REPONAME}-${CIRCLE_BRANCH}" || export APP_NAME="${CIRCLE_PROJECT_REPONAME}"
+            ./publish_rshinyapp.sh
