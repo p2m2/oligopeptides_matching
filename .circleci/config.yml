@@ -93,6 +93,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install package dependencies
+          command: R -e 'devtools::install_deps(dependencies = TRUE)'
+      - run:
           name: deployment on https://www.shinyapps.io/
           command: |
             [ -z "${CIRCLE_TAG}" ] && APP_NAME=${CIRCLE_BRANCH} || APP_NAME="oligopeptides_matching"
