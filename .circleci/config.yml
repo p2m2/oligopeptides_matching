@@ -50,8 +50,6 @@ jobs:
       - image: circleci/golang:1.17
     steps:
       - checkout
-      - node/install:
-          node-version: '19.6'
       - attach_workspace:
           at: workspace
       - run:
