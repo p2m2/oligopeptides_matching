@@ -1,3 +1,4 @@
+library(shiny)
 library(DT)
 
 source("./data.R")
