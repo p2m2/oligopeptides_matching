@@ -30,4 +30,9 @@ if ( nchar(APP_NAME)<=0 ) {
     APP_NAME='oligopeptides_matching'
 }
 
+install.packages("shiny")
+install.packages("DT")
+library(shiny)
+library(DT)
+
 rsconnect::deployApp('oligopeptides_matching',appName=APP_NAME,forceUpdate = TRUE)
