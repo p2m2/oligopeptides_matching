@@ -10,12 +10,12 @@ install()
 library(rsconnect)
 
 if ( nchar(Sys.getenv("SHINYAPPSIO_TOKEN"))<=0 ) {
-    write("** SHINYAPPSIO_TOKEN empty **",stderr())
+    write("** SHINYAPPSIO_TOKEN empty ** check at https://www.shinyapps.io/admin/#/tokens",stderr())
     stop(1)
 }
 
 if ( nchar(Sys.getenv("SHINYAPPSIO_SECRET"))<=0 ) {
-    write("** SHINYAPPSIO_SECRET empty **",stderr())
+    write("** SHINYAPPSIO_SECRET empty ** check at https://www.shinyapps.io/admin/#/tokens",stderr())
     stop(1)
 }
 
@@ -24,8 +24,8 @@ rsconnect::setAccountInfo(name='p2m2',
 			  secret=Sys.getenv("SHINYAPPSIO_SECRET"))
 
 
-APP_NAME = Sys.getenv("APP_NAME")
-
+APP_NAME <- Sys.getenv("APP_NAME")
+write(APP_NAME)
 if ( nchar(APP_NAME)<=0 ) {
     APP_NAME='oligopeptides_matching'
 }
