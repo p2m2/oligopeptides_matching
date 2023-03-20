@@ -26,9 +26,7 @@ workflows:
           filters:
             tags:
               only: /.*/
-            branches:
-              only:
-                - develop
+
 jobs:
   build:
     working_directory: ~/tmp
