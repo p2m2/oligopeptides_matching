@@ -1,7 +1,6 @@
 library(shiny)
 library(DT)
-
-devtools::install_github("p2m2/oligopeptides_matching")
+library(oligopeptidesMatching)
 
 source("./data.R")
 
