@@ -96,4 +96,5 @@ jobs:
           command: |
             # publish only tag release
             export APP_NAME="${CIRCLE_PROJECT_REPONAME}"
+            export GITHUB_PAT=${GITHUB_TOKEN}
             ./publish_rshinyapp.sh
