@@ -1,6 +1,8 @@
 library(shiny)
 library(DT)
 
+devtools::install_github("p2m2/oligopeptides_matching")
+
 source("./data.R")
 
 server <- function(input, output) {
