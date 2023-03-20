@@ -2,10 +2,10 @@
 
 install.packages('rsconnect')
 
-library(devtools)
-library(roxygen2)
-document()
-install()
+#library(devtools)
+#library(roxygen2)
+#document()
+#install()
 
 library(rsconnect)
 
@@ -32,7 +32,6 @@ if ( nchar(APP_NAME)<=0 ) {
 
 install.packages("shiny")
 install.packages("DT")
-library(shiny)
-library(DT)
+devtools::install_github("p2m2/oligopeptides_matching")
 
 rsconnect::deployApp('oligopeptides_matching',appName=APP_NAME,forceUpdate = TRUE)

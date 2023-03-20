@@ -1,7 +1,7 @@
 # oligopeptides_matching
 
 [![p2m2](https://circleci.com/gh/p2m2/oligopeptides_matching.svg?style=shield)](https://app.circleci.com/pipelines/github/p2m2)
-[![](https://img.shields.io/badge/Shiny-shinyapps.io-blue?style=flat&labelColor=white&logo=RStudio&logoColor=blue)](https://p2m2.shinyapps.io/oligopeptides_matching/)
+[![](https://img.shields.io/badge/stable-shinyapps.io-blue?style=flat&labelColor=white&logo=RStudio&logoColor=blue)](https://p2m2.shinyapps.io/oligopeptides_matching/)
 
 In order to compute from amino acids molecular weight the putative oligomers of various oligomerization degree
 
@@ -109,12 +109,11 @@ install.packages("shiny")
 install.packages("DT")
 
 library(shiny)
-library(DT)
 
 library(devtools)
 library(roxygen2)
 document()
-runApp("exampleOligopeptidesMatching_aa")
+runApp("oligopeptides_matching")
 ```
 
 ### Examples

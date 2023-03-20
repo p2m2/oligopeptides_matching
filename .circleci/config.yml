@@ -22,13 +22,12 @@ workflows:
             - build
           context:
             - DOCKER_CONTEXT
+            - GITHUB_CONTEXT
             - SHINYAPP_CONTEXT
           filters:
             tags:
               only: /.*/
-            branches:
-              only:
-                - develop
+
 jobs:
   build:
     working_directory: ~/tmp
@@ -96,5 +95,7 @@ jobs:
       - run:
           name: deployment on https://www.shinyapps.io/
           command: |
-            [ -z "${CIRCLE_TAG}" ] && export APP_NAME="${CIRCLE_PROJECT_REPONAME}-${CIRCLE_BRANCH}" || export APP_NAME="${CIRCLE_PROJECT_REPONAME}"
+            # publish only tag release
+            export APP_NAME="${CIRCLE_PROJECT_REPONAME}"
+            export GITHUB_PAT=${GITHUB_TOKEN}
             ./publish_rshinyapp.sh
