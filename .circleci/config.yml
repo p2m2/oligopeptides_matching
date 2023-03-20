@@ -22,6 +22,7 @@ workflows:
             - build
           context:
             - DOCKER_CONTEXT
+            - GITHUB_CONTEXT
             - SHINYAPP_CONTEXT
           filters:
             tags:
