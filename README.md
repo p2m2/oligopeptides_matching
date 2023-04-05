@@ -122,7 +122,7 @@ runApp("oligopeptides_matching")
 
 ## Acknowledgments
 - Data about polyphenolic compounds are gracefuly provided by Phenol-Explorer:
-    - [Neveu et al. (2010) Database](doi:10.1093/database/bap024)
-    - [Rothwell et al. (2012) Database](doi:10.1093/database/bas031)
-    - [Rothwell et al. (2013) Database](doi:10.1093/database/bat070)
+    - [Neveu et al. (2010) Database](https://doi.org/10.1093/database/bap024)
+    - [Rothwell et al. (2012) Database](https://doi.org/10.1093/database/bas031)
+    - [Rothwell et al. (2013) Database](https://doi.org/10.1093/database/bat070)
 
