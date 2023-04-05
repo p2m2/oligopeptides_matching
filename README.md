@@ -120,3 +120,9 @@ runApp("oligopeptides_matching")
 - [search for amino acid combination](exampleOligopeptidesMatching_aa)
 - [search for amino acids/oligopeptides and polyphenols combination](exampleOligopeptidesMatching_aa_and_polyphenols)
 
+## Acknowledgments
+- Data about polyphenolic compounds are gracefuly provided by Phenol-Explorer:
+    - [Neveu et al. (2010) Database](doi:10.1093/database/bap024)
+    - [Rothwell et al. (2012) Database](doi:10.1093/database/bas031)
+    - [Rothwell et al. (2013) Database](doi:10.1093/database/bat070)
+
