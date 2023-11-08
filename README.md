@@ -44,7 +44,6 @@ document()
 aa1 <- c("A", "C", "D", "E", "F", "G", "H", "I", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "Y")
 
 ### reaction elements
-H2O <- 18.010565
 H <- 1.007825
 
 ### amino acids molecular weight
@@ -56,7 +55,6 @@ mass_aa1 <- c(89.047679, 121.019751, 133.037509, 147.053159, 165.078979,
 aa1_mw <- setNames(mass_aa1, aa1)
 
 oligopeptides <- get_oligopeptides(aminoacids = aa1_mw,
-                          chemical_reaction = H2O,
                           ionization = setNames(c(H),c("H")),
                           oligomerization_degree = 4)
 
