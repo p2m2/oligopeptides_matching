@@ -43,9 +43,6 @@ document()
 ### aminoacids list
 aa1 <- c("A", "C", "D", "E", "F", "G", "H", "I", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "Y")
 
-### reaction elements
-H <- 1.007825
-
 ### amino acids molecular weight
 mass_aa1 <- c(89.047679, 121.019751, 133.037509, 147.053159, 165.078979, 
               75.032029, 155.069477, 131.094629, 146.105528, 131.094629,
@@ -55,7 +52,6 @@ mass_aa1 <- c(89.047679, 121.019751, 133.037509, 147.053159, 165.078979,
 aa1_mw <- setNames(mass_aa1, aa1)
 
 oligopeptides <- get_oligopeptides(aminoacids = aa1_mw,
-                          ionization = setNames(c(H),c("H")),
                           oligomerization_degree = 4)
 
 show(oligopeptides)
@@ -92,8 +88,8 @@ combined_compounds <- get_combination_compounds(compounds_1 = aa_mw,
 
 ```R
 
-mz_obs <- 414.8986
-test <- match_mz_obs(mz_obs, combined_compounds, ppm_error = 700)
+mz_obs <- 358.2811
+test <- match_mz_obs(mz_obs, 'already_charged', combined_compounds, ppm_error = 700)
 
 ```
 

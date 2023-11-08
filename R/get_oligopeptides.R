@@ -18,18 +18,17 @@
 #' @export
 #' @examples
 #' get_oligopeptides(aminoacids = stats::setNames(c(89.047679),c("A")),
-#' ionization = stats::setNames(c(1.007825),c("H")),
 #' oligomerization_degree = 4)
 get_oligopeptides <- function(aminoacids,
-                              ionization,
+                              # ionization,
                               oligomerization_degree){
   H2O <- 18.010565
   tmp_oligopeptides <- aminoacids
-  all_mz_peptides <-  build_mz_peptides(aminoacids, 1, ionization)
+  all_mz_peptides <-  build_mz_peptides(aminoacids, 1)
   for (i in 1:(oligomerization_degree-1)){
     tmp_oligopeptides <- oligopeptides_building(tmp_oligopeptides, aminoacids,
     H2O)
-    tmp_mz_peptides <- build_mz_peptides(tmp_oligopeptides, i+1, ionization)
+    tmp_mz_peptides <- build_mz_peptides(tmp_oligopeptides, i+1)
     all_mz_peptides <- rbind(all_mz_peptides, tmp_mz_peptides)
   }
   return(all_mz_peptides)
