@@ -5,23 +5,16 @@
 #'  - Oligomerization Degree
 #'  - Id (Combinaison of Amino Acid names)
 #'  - Mz (ionized mass)
-#'  - M - X ionization 1 negative mode ionization
-#'  - M + X ionization 1 positive mode ionization
-#'  - M - X ionization 2 negative mode ionization
-#'  - M + X ionization 2 positive mode ionization
 #'  - ...
 #'
 #' @param aminoacids list of amino acids.
-#' @param ionization list of ionization
 #' @param oligomerization_degree integer : oligomerization degree
 #' @return matrix containing OD, Id , Mz ,M - Xionization,M + Xionization .
 #' @export
 #' @examples
 #' get_oligopeptides(aminoacids = stats::setNames(c(89.047679),c("A")),
 #' oligomerization_degree = 4)
-get_oligopeptides <- function(aminoacids,
-                              # ionization,
-                              oligomerization_degree){
+get_oligopeptides <- function(aminoacids,oligomerization_degree){
   H2O <- 18.010565
   tmp_oligopeptides <- aminoacids
   all_mz_peptides <-  build_mz_peptides(aminoacids, 1)

@@ -7,6 +7,10 @@ In order to compute from amino acids molecular weight the putative oligomers of 
 
 ## Install Package locally
 
+```R
+install.packages("devtools",dependancies=TRUE)
+```
+
 ### from github repository
 
 ```R
@@ -15,10 +19,6 @@ devtools::install_github("p2m2/oligopeptides_matching")
 
 ### from source code
 ```R
-# if necessary...
-install.packages(devtools)
-install.packages(roxygen2)
-
 library(devtools)
 library(roxygen2)
 document()
@@ -51,9 +51,7 @@ mass_aa1 <- c(89.047679, 121.019751, 133.037509, 147.053159, 165.078979,
 
 aa1_mw <- setNames(mass_aa1, aa1)
 
-oligopeptides <- get_oligopeptides(aminoacids = aa1_mw,
-                          oligomerization_degree = 4)
-
+oligopeptides <- get_oligopeptides(aminoacids = aa1_mw,oligomerization_degree = 4)
 show(oligopeptides)
 
 ```
@@ -79,10 +77,11 @@ aa <- c(oligopeptides$id)
 aa_mass <- c(oligopeptides$MW)
 aa_mw <- setNames(aa_mass, aa)
 
+H2O <- 18.010565
+
 combined_compounds <- get_combination_compounds(compounds_1 = aa_mw, 
                           compounds_2 = pp_mw, 
-                          chemical_reaction = H2O, 
-                          ionization = setNames(c(H),c("H")))
+                          chemical_reaction = H2O)
 ```
 ## Example 3 : match a mz_obs with the caculated list 
 
