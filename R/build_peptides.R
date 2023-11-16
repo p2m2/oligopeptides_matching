@@ -4,17 +4,14 @@
 #' Builds a matrix containing : 
 #'  - Oligomerization Degree
 #'  - Id (Combinaison of Amino Acid names)
-#'  - Mz (ionized mass)
+#'  - MW (mass)
 #' @param peptide list of oligopeptide, Named num (column with names)
-#' @param oligomerization_degree integer : oligomerization degree  
-#' @param ionization : list of ionization
-#' @return a data.frame containing OD, Id , Mz ,
-#' M + Xionization, M - Xionization
+#' @param oligomerization_degree integer : oligomerization degree
+#' @return a data.frame containing OD, Id , Mz
 #' @export
 #' @examples
-#' build_mz_peptides(
-#' stats::setNames(c(160.0848,192.0569),c("A_A","A_C")), 2)
-build_mz_peptides <- function(peptide,
+#' build_peptides(stats::setNames(c(160.0848,192.0569),c("A_A","A_C")), 2)
+build_peptides <- function(peptide,
                               oligomerization_degree){
   peptide_matrix <- as.data.frame(matrix(data=NA, nrow=length(peptide), ncol=3))
   header <- c("OD", "id", "MW")

@@ -4,13 +4,11 @@
 #' @param compounds_1 compounds_1
 #' @param compounds_2 compounds_2
 #' @param chemical_reaction chemical_reaction
-#' @param ionization ionization
 #' @return δppm of the difference between the mz observed and a theorical one
 #' @export
 get_combination_compounds <- function(compounds_1,
                                       compounds_2,
-                                      chemical_reaction,
-                                      ionization) {
+                                      chemical_reaction) {
 
 n <- length(compounds_1)
 m <- length(compounds_2)
