@@ -55,11 +55,14 @@ match_mz_obs <- function(mz_obs,
     )
 
   return(combined_compounds %>%
-           dplyr::filter(combined_compounds < mz + 0.5) %>%
-           dplyr::filter(combined_compounds >= mz - 0.5) %>%
-           dplyr::mutate(round = round(combined_compounds, digits=4)) %>%
-           dplyr::mutate(ppm_error_value = d_ppm(round, mz)) %>%
-           dplyr::filter(ppm_error_value<ppm_error))
+           dplyr::filter(mass < mz + 0.5) %>%
+           dplyr::filter(mass >= mz - 0.5) %>%
+           dplyr::mutate(ppm_error_value = d_ppm(mass, mz)) %>%
+           dplyr::filter(ppm_error_value<ppm_error) %>%
+           dplyr::mutate(mz_obs, .before=ppm_error_value) %>%
+           dplyr::mutate(mass = round(mass, digits=5)) %>%
+           dplyr::select(mz_obs, mass, ppm_error_value)
+         )
 }
 
 
