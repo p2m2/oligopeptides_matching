@@ -34,7 +34,7 @@ server <- function(input, output) {
      {
       return(match_mz_obs(
         input$mz_obs,
-        'already_charged',
+        input$ionization,
         combination_compounds(),
         ppm_error = input$ppm_error))
     }
