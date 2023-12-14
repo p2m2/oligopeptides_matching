@@ -9,8 +9,6 @@ server <- function(input, output) {
   combination_compounds <- reactive({
         aaa_combined <- get_oligopeptides(
       aminoacids = aa_mw,
-      chemical_reaction = H2O,
-      ionization = ionization_list,
       oligomerization_degree = input$od)
 
     aa_combined <- as.data.frame(aaa_combined)
@@ -18,10 +16,10 @@ server <- function(input, output) {
     aa_combined_mass <- c(aa_combined$MW)
     aa_combined_mw <- setNames(aa_combined_mass, aa_combined_names)
 
-    return(get_combination_compounds(compounds_1 = aa_combined_mw, 
-                              compounds_2 = pp_mw, 
-                              chemical_reaction = H2O, 
-                              ionization = setNames(c(H),c("H"))))
+    return(get_combination_compounds(oligopeptides, 
+                                     polyphenols, 
+                                     addition_reaction,
+                                     chemical_derivation))
   })
   # =====
   # All arrangement AA with PolyPhenols
@@ -35,6 +33,7 @@ server <- function(input, output) {
      {
       return(match_mz_obs(
         input$mz_obs,
+        'already_charged',
         combination_compounds(),
         ppm_error = input$ppm_error))
     }
