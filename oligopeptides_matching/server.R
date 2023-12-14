@@ -18,8 +18,9 @@ server <- function(input, output) {
 
     return(get_combination_compounds(oligopeptides, 
                                      polyphenols, 
-                                     addition_reaction,
-                                     chemical_derivation))
+                                     chemical_derivation,
+                                     addition_reaction
+                                     ))
   })
   # =====
   # All arrangement AA with PolyPhenols

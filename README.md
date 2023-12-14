@@ -115,10 +115,12 @@ polyphenols <- setNames(mass_polyphenol, name_polyphenol)
 H2O <- 18.010565
 addition_reaction <- H2O
 
-combined_compounds <- get_combination_compounds(oligopeptides, 
-                          polyphenols, 
-                          addition_reaction,
-                          chemical_derivation)
+combined_compounds <- get_combination_compounds(
+                        oligopeptides, 
+                          polyphenols,
+                          chemical_derivation, 
+                          addition_reaction
+                          )
                           
 ```
 ## Example 3 : match a mz_obs with the caculated list 
