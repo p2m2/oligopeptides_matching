@@ -1,3 +1,4 @@
+# this file is used in the test. check R directory.
 # Constants
 ### Amino acids
 aa <- c("A", "C", "D", "E", "F", "G", "H", "I", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "Y")
