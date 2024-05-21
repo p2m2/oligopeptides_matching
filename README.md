@@ -36,34 +36,6 @@ PhenolExplorer_DB.xlsx is an excel file containing data from the website http://
 This research was made possible by financial support from the French Governement, the National Cancer Institute (France), Unilever, Danone, and Nestle.
 
 
-# Usage 
-This project includes a series of scripts developed to combine amino acids and polyphenols to generate and analyze oligopeptides and their associated compounds. The scripts are in the following order :  
-  -  Build_peptides.R   
-  -  Oligopeptides_building.R
-  -  get_oligopeptides.R
-  -  get_combination_compounds.R
-  -  d_ppm.R
-  -  Match_mz_obs.R
-  
-# Scripts
-### Build_peptides.R
-This script generates a peptide matrix considering a list of peptides with their masses and a specified oligomerization degree.
-
-### oligopeptides_building.R
-This script constructs a list of oligopeptides by combining existing oligopeptides with a list of amino acids.
-
-### get_oligopeptides.R
-This script generates a comprehensive oligopeptide matrix based on amino acids and oligomerization degree.
-
-### get_combination_compounds.R
-This script creates a matrix of compound combinations from oligopeptides, polyphenols, and their chemical derivatives.
-
-### d_ppm.R
-This script calculates the parts per million (ppm) difference between observed and theoretical m/z.
-
-### Match_mz_obs.R
-This script matches observed m/z with the masses of combined compounds using a specified dppm value. 
-
 ## Help 
 
 ```
