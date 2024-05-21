@@ -8,8 +8,9 @@ library(DT)
 library(oligopeptidesMatching)
 library(shinycssloaders)
 
-source("https://raw.githubusercontent.com/p2m2/oligopeptides_matching/develop/oligopeptides_matching/data.R")
+#source("https://raw.githubusercontent.com/p2m2/oligopeptides_matching/develop/oligopeptides_matching/data.R")
 
+source("https://raw.githubusercontent.com/p2m2/oligopeptides_matching/stage-m1-2024-2/oligopeptides_matching/data.R")
 
 ui <- dashboardPage(
   dashboardHeader(title = "Oligopeptides Matching", titleWidth = 250),
@@ -134,12 +135,12 @@ server <- function(input, output) {
   })
   
   output$amino_acid_table <- renderDataTable({
-    datatable(aa_mw[, input$columns, drop = FALSE], rownames = FALSE, options = list(paging = FALSE)) %>%
+    datatable(aa_mw[, selected_columns()], rownames = FALSE, options = list(paging = FALSE)) %>%
       formatStyle(
         'Specification_AA',
         backgroundColor = styleEqual(
           unique(aa_mw$Specification_AA),
-          c('Non-polaire' = 'lightyellow', 'Polaire' = 'skyblue', 'Charge Négative' = 'orchid', 'Charge Positive' = 'palegreen')
+          c('Non-polaire' = 'lightyellow', 'Polaire' = 'skyblue', 'Charge Negative' = 'orchid', 'Charge Positive' = 'palegreen')
         ),
         fontWeight = 'bold'
       )
