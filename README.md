@@ -30,6 +30,11 @@ install()
 document()
 ```
 
+# Data
+PhenolExplorer_DB.xlsx is an excel file containing data from the website http://phenol-explorer.eu. Phenol-Explorer is the first comprehensive database for polyphenol content in foods. INRA developped Phenol-µExplorer in partnership wuth AFSSA, the University of Alberta, the University of Barcelona, the IARC, and Siliflo.
+This research was made possible by financial support from the French Governement, the National Cancer Institute (France), Unilever, Danone, and Nestle.
+
+
 # Usage 
 This project includes a series of scripts developed to combine amino acids and polyphenols to generate and analyze oligopeptides and their associated compounds. The scripts are in the following order :  
   -  Build_peptides.R   
