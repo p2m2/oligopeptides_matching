@@ -81,6 +81,7 @@ ui <- dashboardPage(
                                  value = 5)
                   ),
                   mainPanel(
+                    downloadButton("downloadData", "Download", style = "position: fixed; bottom: 20px; left: 85%"),
                     h3("Oligopeptides"),
                     withSpinner(DT::dataTableOutput("view_filter_mz_obs"))
                   ),
