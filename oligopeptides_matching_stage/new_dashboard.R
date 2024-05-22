@@ -8,9 +8,8 @@ library(DT)
 library(oligopeptidesMatching)
 library(shinycssloaders)
 
-#source("https://raw.githubusercontent.com/p2m2/oligopeptides_matching/develop/oligopeptides_matching/data.R")
+source("https://raw.githubusercontent.com/p2m2/oligopeptides_matching/develop/oligopeptides_matching/data.R")
 
-source("https://raw.githubusercontent.com/p2m2/oligopeptides_matching/stage-m1-2024-2/oligopeptides_matching/data.R")
 
 ui <- dashboardPage(
   dashboardHeader(title = "Oligopeptides Matching", titleWidth = 250),
@@ -43,7 +42,8 @@ ui <- dashboardPage(
                   mainPanel(
                     style = "right: 40px;",
                     dataTableOutput("amino_acid_table")
-                  )
+                  ),
+                  position = "right"
                 )
               )
       ),
@@ -59,7 +59,8 @@ ui <- dashboardPage(
                   mainPanel(
                     h3("Oligopeptides"),
                     withSpinner(DT::dataTableOutput("view_arrangement"))
-                  )
+                  ),
+                  position = "right"
                 )
               )
       ),
@@ -76,12 +77,13 @@ ui <- dashboardPage(
                                   "Negative" = "neg")),
                     numericInput(inputId = "ppm_error",
                                  label = "Tolerance:",
-                                 value = 10)
+                                 value = 5)
                   ),
                   mainPanel(
                     h3("Oligopeptides"),
                     withSpinner(DT::dataTableOutput("view_filter_mz_obs"))
-                  )
+                  ),
+                  position = "right"
                 )
               )
       ),
@@ -103,6 +105,9 @@ ui <- dashboardPage(
                                  selected = ","),
                     textInput("mz_column", "Enter the column of m/z:", placeholder = "e.g., mz"),
                     textInput("RT_column", "Enter the column of RT:", placeholder = "e.g., RT"),
+                    numericInput(inputId = "ppm_error",
+                                 label = "Tolerance:",
+                                 value = 5),
                     actionButton("update", "Update Table", style = "color: white; background-color: #007bff; border-color: #007bff;"),
                     tableOutput("files")
                   ),
