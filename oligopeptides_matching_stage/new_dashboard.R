@@ -18,7 +18,8 @@ ui <- dashboardPage(
     sidebarMenu(
       menuItem("Welcome!", tabName = "home", icon = icon("home")),
       menuItem("Search", tabName = "search", icon = icon("search")),
-      menuItem("ReadMe", tabName = "readme", icon = icon("mortar-board")),
+      menuItem("ReadMe", tabName = "readme", icon = icon("book")), 
+      #icon("mortar-board")),
       menuItem("Amino Acid and Mass", tabName = "AminoAcidandMass"),
       menuItem("Combination AA Polyphenol", tabName = "CombinationAApolyphenol"),
       menuItem("Match a single mz", tabName = "Matchasinglemz"),
