@@ -23,12 +23,33 @@ ui <- dashboardPage(
       menuItem("Match a list of mz", tabName = "Matchalistofmz"),
       menuItem("About", tabName = "about", icon = icon("question")),
       menuItem("Feedback", tabName = "feedback", icon = icon("envelope"))
+      # HTML(paste0(
+      #   "<br><br><br><br><br><br><br><br><br>",
+      #   "<table style='margin-left:auto; margin-right:auto;'>",
+      #   "<tr>",
+      #   "<td style='padding: 5px;'><a href='https://www.facebook.com/' target='_blank'><i class='fab fa-facebook-square fa-lg'></i></a></td>",
+      #   "<td style='padding: 5px;'><a href='https://twitter.com/' target='_blank'><i class='fab fa-twitter fa-lg'></i></a></td>",
+      #   "<td style='padding: 5px;'><a href='https://www.instagram.com/' target='_blank'><i class='fab fa-instagram fa-lg'></i></a></td>",
+      #   "<td style='padding: 5px;'><a href='http://www.linkedin.com/' target='_blank'><i class='fab fa-linkedin fa-lg'></i></a></td>",
+      #   "<td style='padding: 5px;'><a href='https://plus.google.com/' target='_blank'><i class='fab fa-google-plus fa-lg'></i></a></td>",
+      #   "<td style='padding: 5px;'><a href='https:/www.youtube.com/' target='_blank'><i class='fab fa-youtube fa-lg'></i></a></td>",
+      #   "</tr>",
+      #   "</table>",
+      #   "<br>"),
+      #   HTML(paste0(
+      #     "<script>",
+      #     "var today = new Date();",
+      #     "var yyyy = today.getFullYear();",
+      #     "</script>",
+      #     "<p style = 'text-align: center;'><small>&copy; - <a href='https://sirineoueida.com' target='_blank'>Sirine Oueida </a> - <script>document.write(yyyy);</script></small></p>")
+      #   ))
     )
   ),
   dashboardBody(
     tabItems(
       tabItem(tabName = "home",
-              h2("Welcome to the Home Page !")
+              h2("Welcome to the Home Page !"),
+              includeMarkdown("readME.md")
       ),
       # tabItem(tabName = "AminoAcidandMass",
       #         fluidRow(
@@ -51,7 +72,6 @@ ui <- dashboardPage(
       # ),
       tabItem(tabName = "CombinationAApolyphenol",
               fluidPage(
-                title = "Combination AA Polyphenol",
                 sidebarLayout(
                   sidebarPanel(
                     numericInput(inputId = "od",
@@ -59,7 +79,7 @@ ui <- dashboardPage(
                                  value = 3)
                   ),
                   mainPanel(
-                    h3("Oligopeptides"),
+                    h3("Combination AA Polyphenol"),
                     withSpinner(DT::dataTableOutput("view_arrangement"))
                   ),
                   position = "right"
@@ -83,7 +103,7 @@ ui <- dashboardPage(
                   ),
                   mainPanel(
                     downloadButton("downloadData", "Download", style = "position: fixed; bottom: 20px; left: 85%"),
-                    h3("Oligopeptides"),
+                    h3("Match a single mz"),
                     withSpinner(DT::dataTableOutput("view_filter_mz_obs"))
                   ),
                   position = "right"
@@ -92,6 +112,7 @@ ui <- dashboardPage(
       ),
       tabItem(tabName = "Matchalistofmz",
               fluidPage(
+                title = "Match a list of mz",
                 sidebarLayout(
                   sidebarPanel(
                     fileInput("file1", "Choose CSV file", NULL, buttonLabel = "Upload a file...",
@@ -106,15 +127,16 @@ ui <- dashboardPage(
                                              Semicolon = ";",
                                              Tab = "\t"),
                                  selected = ","),
-                    textInput("mz_column", "Enter the column of m/z:", placeholder = "e.g., mz"),
-                    textInput("RT_column", "Enter the column of RT:", placeholder = "e.g., RT"),
+                    textInput("mz_column", "Enter number of the column of m/z:", placeholder = "e.g., mz"),
+                    textInput("RT_column", "Enter number of the column of RT:", placeholder = "e.g., RT"),
                     numericInput(inputId = "ppm_error",
                                  label = "Tolerance:",
                                  value = 5),
-                    actionButton("update", "Update Table", style = "color: white; background-color: #007bff; border-color: #007bff;"),
+                    actionButton("update", "Search Match", style = "color: white; background-color: #007bff; border-color: #007bff;"),
                     tableOutput("files")
                   ),
                   mainPanel(
+                    h3("Match a list of mz"),
                     downloadButton("downloadData", "Download", style = "position: fixed; bottom: 20px; left: 85%")
                   )
                 )
