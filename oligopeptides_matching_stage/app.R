@@ -26,25 +26,25 @@ ui <- dashboardPage(
   ),
   dashboardBody(
     tabItems(
-      tabItem(tabName = "AminoAcidandMass",
-              fluidRow(
-                sidebarLayout(
-                  sidebarPanel(
-                    style = "width: 200px;",
-                    checkboxGroupInput("columns",
-                                       label = "Select columns to display:",
-                                       choices = c("Full_Name", "Symbol", "Amino_Acid", "Mass", "Specification_AA")
-                    ),
-                    actionButton("Ok", label = "Ok", style = "color: white; background-color: #007bff; border-color: #007bff;")
-                  ),
-                  mainPanel(
-                    style = "right: 40px;",
-                    dataTableOutput("amino_acid_table")
-                  ),
-                  position = "right"
-                )
-              )
-      ),
+      # tabItem(tabName = "AminoAcidandMass",
+      #         fluidRow(
+      #           sidebarLayout(
+      #             sidebarPanel(
+      #               style = "width: 200px;",
+      #               checkboxGroupInput("columns",
+      #                                  label = "Select columns to display:",
+      #                                  choices = c("Full_Name", "Symbol", "Amino_Acid", "Mass", "Specification_AA")
+      #               ),
+      #               actionButton("Ok", label = "Ok", style = "color: white; background-color: #007bff; border-color: #007bff;")
+      #             ),
+      #             mainPanel(
+      #               style = "right: 40px;",
+      #               dataTableOutput("amino_acid_table")
+      #             ),
+      #             position = "right"
+      #           )
+      #         )
+      # ),
       tabItem(tabName = "CombinationAApolyphenol",
               fluidPage(
                 title = "Combination AA Polyphenol",
