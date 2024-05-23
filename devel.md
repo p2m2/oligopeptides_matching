@@ -1,5 +1,8 @@
 # Introduction 
+Legume cops constitute a promising alternative to reduce meat proteins in human diet. One of the locks to their use is the presence of polyphenols. Condensed tannins (polyphenol polymers) are contained in testa and during the processing steps (i.e alkalinization) some can be processed with the kernel. High pH triggered polyphenols autoxidation that led to quinone formation and thus to nucleophilic attacks (Michael addition or imine formation1) on proteins.
 
+Despite considerable advances in metabolomics annotation, the metabolite identification remains challenging2. If numerous of natural compounds are now well known, the annotation of adducts and derivatives needs to the in-depth comprehension of natural compound reactivity and transformations3. 
+            Here we propose a computational solution to identify **polyphenol-peptides adducts in HRMS data.** We first compute possible peptides formation based on amino acids molecular weight (MW), we then calculate the addition of polyphenols through Michael addition and/or imine formation. While the addition reaction is a parameter which has to be set by the user, the polyphenol list remains under his control. At the end, the user will compare his experimental data to the in-silico database. The tolerated mass deviation is user-selectable (default 5ppm) and results are finally presented as a table. It gathers the putative adduct annotation, its MW, the feature identity (RT & m/z) that match with and δppm and a score. After validation, the aim is to release our solution in CRAN repository and to offer a visual interface using **RShiny**
 
 
 # Developper notes
@@ -38,15 +41,26 @@ This script calculates the parts per million (ppm) difference between observed a
 This script matches observed m/z with the masses of combined compounds using a specified dppm value. 
 
 
-# Combination AA Polyphenol
+# Développement de l'interface shiny
+
+## Amino acid and mass
 <div style="text-align:center;"> 
-![**Figure 1 : Evolution des BM-MSC vers les FL-BM B ou les FL LN B**](/Données/Sirine OUEIDA 2024/Combination_AA.png)
+![**Amino acid and mass**](/Données/Sirine OUEIDA 2024/Amino_acid.png)
+</div>
+
+## Combination AA Polyphenol
+<div style="text-align:center;"> 
+![**Polyphenols and peptide conjugation**](/Données/Sirine OUEIDA 2024/Combination_AA.png)
 </div>
 
 
+## Match single mz
+<div style="text-align:center;"> 
+![**Match single mz**](/Données/Sirine OUEIDA 2024/Match_single.png)
+</div>
 
 
-
+# Match a list of mz
 
 
 
