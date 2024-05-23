@@ -16,16 +16,20 @@ ui <- dashboardPage(
   dashboardSidebar(
     width = 250,
     sidebarMenu(
-      menuItem("Welcome!", tabName = "home", icon = icon("home")),
+      menuItem("Home", tabName = "home", icon = icon("home")),
       #menuItem("Amino Acid and Mass", tabName = "AminoAcidandMass"),
       menuItem("Combination AA Polyphenol", tabName = "CombinationAApolyphenol"),
       menuItem("Match a single mz", tabName = "Matchasinglemz"),
       menuItem("Match a list of mz", tabName = "Matchalistofmz"),
-      menuItem("About", tabName = "about", icon = icon("question"))
+      menuItem("About", tabName = "about", icon = icon("question")),
+      menuItem("Feedback", tabName = "feedback", icon = icon("envelope"))
     )
   ),
   dashboardBody(
     tabItems(
+      tabItem(tabName = "home",
+              h2("Welcome to the Home Page !")
+      ),
       # tabItem(tabName = "AminoAcidandMass",
       #         fluidRow(
       #           sidebarLayout(
