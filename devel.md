@@ -1,3 +1,7 @@
+# Introduction 
+
+
+
 # Developper notes
 
 **PhenolExplorer_DB.xlsx** is an excel file containing data from the website http://phenol-explorer.eu. It contains 501 observations and 14 columns.
@@ -32,6 +36,18 @@ This script calculates the parts per million (ppm) difference between observed a
 
 ### Match_mz_obs.R
 This script matches observed m/z with the masses of combined compounds using a specified dppm value. 
+
+
+# Combination AA Polyphenol
+<div style="text-align:center;"> 
+![**Figure 1 : Evolution des BM-MSC vers les FL-BM B ou les FL LN B**](/Données/Sirine OUEIDA 2024/Combination_AA.png)
+</div>
+
+
+
+
+
+
 
 
 ## check package
