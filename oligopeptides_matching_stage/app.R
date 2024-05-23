@@ -17,10 +17,7 @@ ui <- dashboardPage(
     width = 250,
     sidebarMenu(
       menuItem("Welcome!", tabName = "home", icon = icon("home")),
-      menuItem("Search", tabName = "search", icon = icon("search")),
-      menuItem("ReadMe", tabName = "readme", icon = icon("book")), 
-      #icon("mortar-board")),
-      menuItem("Amino Acid and Mass", tabName = "AminoAcidandMass"),
+      #menuItem("Amino Acid and Mass", tabName = "AminoAcidandMass"),
       menuItem("Combination AA Polyphenol", tabName = "CombinationAApolyphenol"),
       menuItem("Match a single mz", tabName = "Matchasinglemz"),
       menuItem("Match a list of mz", tabName = "Matchalistofmz"),
@@ -132,26 +129,26 @@ ui <- dashboardPage(
 )
 
 server <- function(input, output) {
-  selected_columns <- eventReactive(input$Ok, {
-    columns <- input$columns
-    if (is.null(columns)) {
-      names(aa_mw)
-    } else {
-      columns
-    }
-  })
-  
-  output$amino_acid_table <- renderDataTable({
-    datatable(aa_mw[, selected_columns()], rownames = FALSE, options = list(paging = FALSE)) %>%
-      formatStyle(
-        'Specification_AA',
-        backgroundColor = styleEqual(
-          unique(aa_mw$Specification_AA),
-          c('Non-polaire' = 'lightyellow', 'Polaire' = 'skyblue', 'Charge Negative' = 'orchid', 'Charge Positive' = 'palegreen')
-        ),
-        fontWeight = 'bold'
-      )
-  })
+  # selected_columns <- eventReactive(input$Ok, {
+  #   columns <- input$columns
+  #   if (is.null(columns)) {
+  #     names(aa_mw)
+  #   } else {
+  #     columns
+  #   }
+  # })
+  # 
+  # output$amino_acid_table <- renderDataTable({
+  #   datatable(aa_mw[, selected_columns()], rownames = FALSE, options = list(paging = FALSE)) %>%
+  #     formatStyle(
+  #       'Specification_AA',
+  #       backgroundColor = styleEqual(
+  #         unique(aa_mw$Specification_AA),
+  #         c('Non-polaire' = 'lightyellow', 'Polaire' = 'skyblue', 'Charge Negative' = 'orchid', 'Charge Positive' = 'palegreen')
+  #       ),
+  #       fontWeight = 'bold'
+  #     )
+  # })
   
   combination_compounds <- reactive({
     req(input$od)
