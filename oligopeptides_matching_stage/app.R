@@ -105,7 +105,10 @@ ui <- dashboardPage(
                   mainPanel(
                     downloadButton("downloadData", "Download", style = "position: fixed; bottom: 20px; left: 85%"),
                     h3("Match a single mz"),
-                    withSpinner(DT::dataTableOutput("view_filter_mz_obs"))
+                    conditionalPanel(
+                      condition = "input.Ok > 0",
+                      withSpinner(DT::dataTableOutput("view_filter_mz_obs"))
+                    )
                   ),
                   position = "right"
                 )
@@ -216,8 +219,11 @@ server <- function(input, output) {
     }
   })
   
+  observeEvent(input$Ok, {
+    Sys.sleep(2)
   output$view_filter_mz_obs <- renderDT({
     filtered_mz_obs()
+  })
   })
   
   output$files <- renderTable(input$file1)
