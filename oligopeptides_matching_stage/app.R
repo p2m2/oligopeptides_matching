@@ -99,7 +99,8 @@ ui <- dashboardPage(
                                   "Negative" = "neg")),
                     numericInput(inputId = "ppm_error",
                                  label = "Tolerance:",
-                                 value = 5)
+                                 value = 5),
+                    actionButton("Ok", label = "Ok", style = "color: white; background-color: #007bff; border-color: #007bff;")
                   ),
                   mainPanel(
                     downloadButton("downloadData", "Download", style = "position: fixed; bottom: 20px; left: 85%"),
