@@ -175,7 +175,6 @@ server <- function(input, output) {
   #     columns
   #   }
   # })
-  # 
   # output$amino_acid_table <- renderDataTable({
   #   datatable(aa_mw[, selected_columns()], rownames = FALSE, options = list(paging = FALSE)) %>%
   #     formatStyle(
