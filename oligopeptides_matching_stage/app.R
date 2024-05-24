@@ -18,6 +18,7 @@ ui <- dashboardPage(
     sidebarMenu(
       menuItem("Home", tabName = "home", icon = icon("home")),
       #menuItem("Amino Acid and Mass", tabName = "AminoAcidandMass"),
+      menuItem("Amino-acid assemblies", tabName = "assemblies", icon = icon("calculator")),
       menuItem("Combination AA Polyphenol", tabName = "CombinationAApolyphenol"),
       menuItem("Match a single mz", tabName = "Matchasinglemz"),
       menuItem("Match a list of mz", tabName = "Matchalistofmz"),
@@ -36,13 +37,6 @@ ui <- dashboardPage(
       #   "</tr>",
       #   "</table>",
       #   "<br>"),
-      #   HTML(paste0(
-      #     "<script>",
-      #     "var today = new Date();",
-      #     "var yyyy = today.getFullYear();",
-      #     "</script>",
-      #     "<p style = 'text-align: center;'><small>&copy; - <a href='https://sirineoueida.com' target='_blank'>Sirine Oueida </a> - <script>document.write(yyyy);</script></small></p>")
-      #   ))
     )
   ),
   dashboardBody(
@@ -70,6 +64,20 @@ ui <- dashboardPage(
       #           )
       #         )
       # ),
+        tabItem(tabName = "assemblies",
+              fluidPage(
+                  sidebarLayout(
+                    sidebarPanel(
+                      numericInput("od", "Oligomerization degree:", value = 1, min = 1),
+                      actionButton("calculate", "Calculate", style = "color: white; background-color: #007bff; border-color: #007bff;")
+                  ),
+                  mainPanel(
+                    h3("Amino-acid assemblies"),
+                    withSpinner(DT::dataTableOutput("results"))
+                  )
+                  )
+                )
+      ),
       tabItem(tabName = "CombinationAApolyphenol",
               fluidPage(
                 sidebarLayout(
@@ -179,6 +187,18 @@ server <- function(input, output) {
   #       fontWeight = 'bold'
   #     )
   # })
+  results <- eventReactive(input$calculate, {
+    req(input$od)
+    oligopeptides <- get_oligopeptides(
+      aminoacids = aa_mw,
+      oligomerization_degree = input$od
+    )
+    as.data.frame(oligopeptides)
+  })
+  
+  output$results <- renderDT({
+    results()
+  })
   
   combination_compounds <- reactive({
     req(input$od)
