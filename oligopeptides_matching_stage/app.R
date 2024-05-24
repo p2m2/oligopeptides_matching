@@ -12,7 +12,7 @@ source("https://raw.githubusercontent.com/p2m2/oligopeptides_matching/develop/ol
 
 
 ui <- dashboardPage(
-  dashboardHeader(title = "Oligopeptides Matching", titleWidth = 250),
+  dashboardHeader(title = "Oligopeptide Matching", titleWidth = 250),
   dashboardSidebar(
     width = 250,
     sidebarMenu(
