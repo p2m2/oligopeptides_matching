@@ -36,7 +36,7 @@ ui <- dashboardPage(
       #   "<td style='padding: 5px;'><a href='https:/www.youtube.com/' target='_blank'><i class='fab fa-youtube fa-lg'></i></a></td>",
       #   "</tr>",
       #   "</table>",
-      #   "<br>"),
+      #   "<br>")
     )
   ),
   dashboardBody(
