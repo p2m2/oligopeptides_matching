@@ -177,6 +177,9 @@ ui <- dashboardPage(
 )
 
 server <- function(input, output) {
+  myCSV <- reactive({
+    read.csv(input$file1)
+  })
   # selected_columns <- eventReactive(input$Ok, {
   #   columns <- input$columns
   #   if (is.null(columns)) {
@@ -242,7 +245,7 @@ server <- function(input, output) {
     req(input$mz_obs, input$ppm_error)
     data <- match_mz_obs(
       mz_obs = input$mz_obs,
-      ionization = 'already_charged',
+      ionization = input$ionization,
       combination_compounds(),
       ppm_error = input$ppm_error
     )
