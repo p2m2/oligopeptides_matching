@@ -5,7 +5,7 @@
 library(shiny)
 library(shinydashboard)
 library(DT)
-library(oligopeptidesMatching)
+library(oligopeptidesMatching) 
 library(shinycssloaders)
 
 source("https://raw.githubusercontent.com/p2m2/oligopeptides_matching/develop/oligopeptides_matching/data.R")
