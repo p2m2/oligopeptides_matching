@@ -44,7 +44,9 @@ ui <- dashboardPage(
     tabItems(
       tabItem(tabName = "home",
               h2("Welcome to the Home Page !"),
-              includeMarkdown("welcome.md")
+              tagList(
+                includeMarkdown("welcome.md")
+              )
       ),
       # tabItem(tabName = "AminoAcidandMass",
       #         fluidRow(
