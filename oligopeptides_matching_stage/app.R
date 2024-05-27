@@ -43,7 +43,7 @@ ui <- dashboardPage(
     tabItems(
       tabItem(tabName = "home",
               h2("Welcome to the Home Page !"),
-              includeMarkdown("readME.md")
+              includeMarkdown("welcome.md")
       ),
       # tabItem(tabName = "AminoAcidandMass",
       #         fluidRow(
@@ -139,6 +139,7 @@ ui <- dashboardPage(
                                              Semicolon = ";",
                                              Tab = "\t"),
                                  selected = ","),
+                    textInput("name_column", "Enter number of the column of feature name:", placeholder = "e.g., name"),
                     textInput("mz_column", "Enter number of the column of m/z:", placeholder = "e.g., mz"),
                     textInput("RT_column", "Enter number of the column of RT:", placeholder = "e.g., RT"),
                     numericInput(inputId = "ppm_error",
@@ -148,20 +149,24 @@ ui <- dashboardPage(
                     tableOutput("files")
                   ),
                   mainPanel(
+                    downloadButton("downloadData", "Download", style = "position: fixed; bottom: 20px; left: 85%"),
                     h3("Match a list of mz"),
-                    downloadButton("downloadData", "Download", style = "position: fixed; bottom: 20px; left: 85%")
+                    conditionalPanel(
+                      condition = "input.update > 0",
+                      withSpinner(DT::dataTableOutput("view_match"))
+                    )
                   )
                 )
               )
-      ),
-      tabItem(tabName = "about",
-              fluidPage(
-                tags$iframe(src = 'https://github.com/p2m2/oligopeptides_matching/tree/stage-m1-2024-2/README.Rmd',
-                            width = '100%', height = '800px',
-                            frameborder = 0, scrolling = 'auto'
-                )
-              )
       )
+      # tabItem(tabName = "about",
+      #         fluidPage(
+      #           tags$iframe(src = 'https://github.com/p2m2/oligopeptides_matching/tree/stage-m1-2024-2/README.Rmd',
+      #                       width = '100%', height = '800px',
+      #                       frameborder = 0, scrolling = 'auto'
+      #           )
+      #         )
+      # )
     )
   )
 )
@@ -186,7 +191,7 @@ server <- function(input, output) {
   #       fontWeight = 'bold'
   #     )
   # })
-  results <- eventReactive(input$calculate, {
+  filtered_results <- eventReactive(input$calculate, {
     req(input$od)
     oligopeptides <- get_oligopeptides(
       aminoacids = aa_mw,
@@ -196,7 +201,7 @@ server <- function(input, output) {
   })
   
   output$results <- renderDT({
-    results()
+    filtered_results()
   })
   
   combination_compounds <- reactive({
@@ -254,6 +259,18 @@ server <- function(input, output) {
       write.csv(datasetInput(), file1, row.names = FALSE)
     }
   )
+  # match_res <- eventReactive(input$update, {
+  #   req(input$od)
+  #   matching <- match_mz_obs(
+  #     aminoacids = aa_mw,
+  #     oligomerization_degree = input$od
+  #   )
+  #   as.data.frame(matching)
+  # }) 
+  
+  output$view_match <- renderDT({
+    filtered_mz_obs()
+  })
 }
 
 shinyApp(ui, server)
