@@ -7,6 +7,7 @@ library(shinydashboard)
 library(DT)
 library(oligopeptidesMatching) 
 library(shinycssloaders)
+library(dplyr)
 
 #source("https://raw.githubusercontent.com/p2m2/oligopeptides_matching/develop/oligopeptides_matching/data.R")
 
@@ -68,7 +69,7 @@ ui <- dashboardPage(
               fluidPage(
                   sidebarLayout(
                     sidebarPanel(
-                      numericInput("od", "Oligomerization degree:", value = 1, min = 1),
+                      numericInput("od_1", "Oligomerization degree:", value = 1, min = 1),
                       actionButton("calculate", "Calculate", style = "color: white; background-color: #007bff; border-color: #007bff;")
                   ),
                   mainPanel(
@@ -143,9 +144,9 @@ ui <- dashboardPage(
                                              Semicolon = ";",
                                              Tab = "\t"),
                                  selected = ","),
-                    textInput("name_column", "Enter number of the column of feature name:", placeholder = "e.g., name"),
-                    textInput("mz_column", "Enter number of the column of m/z:", placeholder = "e.g., mz"),
-                    textInput("RT_column", "Enter number of the column of RT:", placeholder = "e.g., RT"),
+                    numericInput("name_column", "Enter the column number of feature name:", value = 1),
+                    numericInput("mz_column", "Enter the column number of m/z:", value = 2),
+                    numericInput("RT_column", "Enter the column number of RT:", value = 3),
                     numericInput(inputId = "ppm_error",
                                  label = "Tolerance:",
                                  value = 5),
@@ -196,21 +197,25 @@ server <- function(input, output) {
   #     )
   # })
   filtered_results <- eventReactive(input$calculate, {
-    req(input$od)
+    req(input$od_1)
     oligopeptides <- get_oligopeptides(
       aminoacids = aa_mw,
-      oligomerization_degree = input$od
+      oligomerization_degree = input$od_1
     )
     as.data.frame(oligopeptides)
   })
   
-  observeEvent(input$od, {
-    filtered_results()
-  })
-  
   output$results <- renderDT({
-    filtered_results()
+    filter_od <- filtered_results()
+    DT::datatable(filter_od)
   })
+ 
+  # output$results <- renderDT({
+  #   filter_od <- filtered_results()
+  #   filter_od <- filter_od %>% 
+  #     filter(od == input$od_1)
+  #   DT::datatable(filter_od)
+  # })
   
   combination_compounds <- reactive({
     req(input$od)
@@ -258,7 +263,6 @@ server <- function(input, output) {
   })
   })
   
-  output$files <- renderTable(input$file1)
   output$downloadData <- downloadHandler(
     filename = function() {
       paste(input$file1, ".csv", sep = "")
