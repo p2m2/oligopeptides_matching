@@ -8,7 +8,7 @@ library(DT)
 library(oligopeptidesMatching) 
 library(shinycssloaders)
 
-source("https://raw.githubusercontent.com/p2m2/oligopeptides_matching/develop/oligopeptides_matching/data.R")
+#source("https://raw.githubusercontent.com/p2m2/oligopeptides_matching/develop/oligopeptides_matching/data.R")
 
 
 ui <- dashboardPage(
@@ -73,8 +73,12 @@ ui <- dashboardPage(
                   ),
                   mainPanel(
                     h3("Amino-acid assemblies"),
-                    withSpinner(DT::dataTableOutput("results"))
-                  )
+                    conditionalPanel(
+                      condition = "input.calculate > 0",
+                      withSpinner(DT::dataTableOutput("results"))
+                    )
+                  ),
+                  position = "right"
                   )
                 )
       ),
