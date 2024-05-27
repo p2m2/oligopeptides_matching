@@ -204,6 +204,10 @@ server <- function(input, output) {
     as.data.frame(oligopeptides)
   })
   
+  observeEvent(input$od, {
+    filtered_results()
+  })
+  
   output$results <- renderDT({
     filtered_results()
   })
