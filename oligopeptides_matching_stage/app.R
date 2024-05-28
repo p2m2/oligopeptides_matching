@@ -118,7 +118,7 @@ ui <- dashboardPage(
                     actionButton("Ok", label = "Ok", style = "color: white; background-color: #007bff; border-color: #007bff;")
                   ),
                   mainPanel(
-                    downloadButton("downloadData", "Download", style = "position: fixed; bottom: 20px; left: 85%"),
+                    downloadButton("downloadDataSingle", "Download", style = "position: fixed; bottom: 20px; left: 85%"),
                     h3("Match a single mz"),
                     conditionalPanel(
                       condition = "input.Ok > 0",
@@ -156,7 +156,7 @@ ui <- dashboardPage(
                     tableOutput("files")
                   ),
                   mainPanel(
-                    downloadButton("downloadData", "Download", style = "position: fixed; bottom: 20px; left: 85%"),
+                    downloadButton("downloadDataList", "Download", style = "position: fixed; bottom: 20px; left: 85%"),
                     h3("Match a list of mz"),
                     conditionalPanel(
                       condition = "input.update > 0",
@@ -180,8 +180,12 @@ ui <- dashboardPage(
 
 server <- function(input, output) {
   myCSV <- reactive({
-    read.csv(input$file1)
+    req(input$file1)
+    read.csv(input$file1$datapath, header = input$header, sep = input$sep)
   })
+  # myCSV <- reactive({
+  #   read.csv(input$file1)
+  # })
   # selected_columns <- eventReactive(input$Ok, {
   #   columns <- input$columns
   #   if (is.null(columns)) {
@@ -268,14 +272,6 @@ server <- function(input, output) {
   })
   })
   
-  output$downloadData <- downloadHandler(
-    filename = function() {
-      paste(input$file1, ".csv", sep = "")
-    },
-    content = function(file1) {
-      write.csv(datasetInput(), file1, row.names = FALSE)
-    }
-  )
   # match_res <- eventReactive(input$update, {
   #   req(input$od)
   #   matching <- match_mz_obs(
@@ -288,6 +284,22 @@ server <- function(input, output) {
   output$view_match <- renderDT({
     filtered_mz_obs()
   })
+  output$downloadDataSingle <- downloadHandler(
+    filename = function() {
+      paste("single_match", Sys.Date(), ".csv", sep = "")
+    },
+    content = function(file1) {
+      write.csv(filtered_mz_obs, file1, row.names = FALSE)
+    }
+  )
+  output$downloadDataList <- downloadHandler(
+    filename = function() {
+      paste("list_match", Sys.Date(), ".csv", sep = "")
+    },
+    content = function(file1) {
+      write.csv(match_res(), file1, row.names = FALSE)
+    }
+  )
 }
 
 shinyApp(ui, server)
