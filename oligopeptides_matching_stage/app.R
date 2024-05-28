@@ -8,6 +8,8 @@ library(DT)
 library(oligopeptidesMatching) 
 library(shinycssloaders)
 library(dplyr)
+library("shinyWidgets")
+
 
 #source("https://raw.githubusercontent.com/p2m2/oligopeptides_matching/develop/oligopeptides_matching/data.R")
 
@@ -18,26 +20,13 @@ ui <- dashboardPage(
     width = 250,
     sidebarMenu(
       menuItem("Home", tabName = "home", icon = icon("home")),
-      #menuItem("Amino Acid and Mass", tabName = "AminoAcidandMass"),
+      menuItem("Amino Acid and Mass", tabName = "AminoAcidandMass"),
       menuItem("Amino-acid assemblies", tabName = "assemblies", icon = icon("calculator")),
       menuItem("Combination AA Polyphenol", tabName = "CombinationAApolyphenol"),
       menuItem("Match a single mz", tabName = "Matchasinglemz"),
       menuItem("Match a list of mz", tabName = "Matchalistofmz"),
       menuItem("About", tabName = "about", icon = icon("question")),
       menuItem("Feedback", tabName = "feedback", icon = icon("envelope"))
-      # HTML(paste0(
-      #   "<br><br><br><br><br><br><br><br><br>",
-      #   "<table style='margin-left:auto; margin-right:auto;'>",
-      #   "<tr>",
-      #   "<td style='padding: 5px;'><a href='https://www.facebook.com/' target='_blank'><i class='fab fa-facebook-square fa-lg'></i></a></td>",
-      #   "<td style='padding: 5px;'><a href='https://twitter.com/' target='_blank'><i class='fab fa-twitter fa-lg'></i></a></td>",
-      #   "<td style='padding: 5px;'><a href='https://www.instagram.com/' target='_blank'><i class='fab fa-instagram fa-lg'></i></a></td>",
-      #   "<td style='padding: 5px;'><a href='http://www.linkedin.com/' target='_blank'><i class='fab fa-linkedin fa-lg'></i></a></td>",
-      #   "<td style='padding: 5px;'><a href='https://plus.google.com/' target='_blank'><i class='fab fa-google-plus fa-lg'></i></a></td>",
-      #   "<td style='padding: 5px;'><a href='https:/www.youtube.com/' target='_blank'><i class='fab fa-youtube fa-lg'></i></a></td>",
-      #   "</tr>",
-      #   "</table>",
-      #   "<br>")
     )
   ),
   dashboardBody(
@@ -48,25 +37,25 @@ ui <- dashboardPage(
                 includeMarkdown("welcome.md")
               )
       ),
-      # tabItem(tabName = "AminoAcidandMass",
-      #         fluidRow(
-      #           sidebarLayout(
-      #             sidebarPanel(
-      #               style = "width: 200px;",
-      #               checkboxGroupInput("columns",
-      #                                  label = "Select columns to display:",
-      #                                  choices = c("Full_Name", "Symbol", "Amino_Acid", "Mass", "Specification_AA")
-      #               ),
-      #               actionButton("Ok", label = "Ok", style = "color: white; background-color: #007bff; border-color: #007bff;")
-      #             ),
-      #             mainPanel(
-      #               style = "right: 40px;",
-      #               dataTableOutput("amino_acid_table")
-      #             ),
-      #             position = "right"
-      #           )
-      #         )
-      # ),
+      tabItem(tabName = "AminoAcidandMass",
+              fluidRow(
+                sidebarLayout(
+                  sidebarPanel(
+                    style = "width: 200px;",
+                    checkboxGroupInput("columns",
+                                       label = "Select columns to display:",
+                                       choices = c("Full_Name", "Symbol", "Amino_Acid", "Mass", "Specification_AA"),
+                    ),
+                    actionButton("Ok", label = "Ok", style = "color: white; background-color: #007bff; border-color: #007bff;")
+                  ),
+                  mainPanel(
+                    style = "right: 40px;",
+                    dataTableOutput("amino_acid_table")
+                  ),
+                  position = "right"
+                )
+              )
+      ),
         tabItem(tabName = "assemblies",
               fluidPage(
                   sidebarLayout(
@@ -186,25 +175,26 @@ server <- function(input, output) {
   # myCSV <- reactive({
   #   read.csv(input$file1)
   # })
-  # selected_columns <- eventReactive(input$Ok, {
-  #   columns <- input$columns
-  #   if (is.null(columns)) {
-  #     names(aa_mw)
-  #   } else {
-  #     columns
-  #   }
-  # })
-  # output$amino_acid_table <- renderDataTable({
-  #   datatable(aa_mw[, selected_columns()], rownames = FALSE, options = list(paging = FALSE)) %>%
-  #     formatStyle(
-  #       'Specification_AA',
-  #       backgroundColor = styleEqual(
-  #         unique(aa_mw$Specification_AA),
-  #         c('Non-polaire' = 'lightyellow', 'Polaire' = 'skyblue', 'Charge Negative' = 'orchid', 'Charge Positive' = 'palegreen')
-  #       ),
-  #       fontWeight = 'bold'
-  #     )
-  # })
+  selected_columns <- eventReactive(input$Ok, {
+    columns <- input$columns
+    if (is.null(columns)) {
+      names(aa_mw)
+    } else {
+      columns
+    }
+  })
+  output$amino_acid_table <- renderDataTable({
+    datatable(aa_mw[, selected_columns()], rownames = FALSE, options = list(paging = FALSE)) %>%
+      formatStyle(
+        'Specification_AA',
+        backgroundColor = styleEqual(
+          unique(aa_mw$Specification_AA),
+          c('Non-polaire' = 'lightyellow', 'Polaire' = 'skyblue', 'Charge Negative' = 'orchid', 'Charge Positive' = 'palegreen')
+        ),
+        fontWeight = 'bold'
+      )
+  })
+  
   filtered_results <- eventReactive(input$calculate, {
     req(input$od_1)
     oligopeptides <- get_oligopeptides(
@@ -283,10 +273,11 @@ server <- function(input, output) {
   
   output$view_match <- renderDT({
     filtered_mz_obs()
+    match_res()
   })
   output$downloadDataSingle <- downloadHandler(
     filename = function() {
-      paste("single_match", Sys.Date(), ".csv", sep = "")
+      paste("single_match", ".csv", sep = "")
     },
     content = function(file1) {
       write.csv(filtered_mz_obs, file1, row.names = FALSE)
@@ -294,7 +285,7 @@ server <- function(input, output) {
   )
   output$downloadDataList <- downloadHandler(
     filename = function() {
-      paste("list_match", Sys.Date(), ".csv", sep = "")
+      paste("list_match", ".csv", sep = "")
     },
     content = function(file1) {
       write.csv(match_res(), file1, row.names = FALSE)
