@@ -13,7 +13,7 @@ library(dplyr)
 
 
 ui <- dashboardPage(
-  dashboardHeader(title = "Oligopeptide Matching", titleWidth = 250),
+  dashboardHeader(title = "Oligopeptides Matching", titleWidth = 250),
   dashboardSidebar(
     width = 250,
     tags$style(HTML(".share-buttons { text-align: center; margin-top: 20px; }" )),
@@ -36,12 +36,13 @@ ui <- dashboardPage(
   # ),
       HTML(paste0(
         "<br><br><br><br><br><br><br><br><br>",
-        "<table style='margin-left:auto; margin-right:auto;margin-top: 20px'>",
+        "<table style='margin-left:auto; margin-right:auto; '>",
         "<tr>",
         "<td style='padding: 5px;'><a href='https://www.facebook.com/sharer/sharer.php?u=https://si-o-02-bioinfo.shinyapps.io/oligopeptides_matching/' target='_blank'><i class='fab fa-facebook-square fa-lg'></i></a></td>",
         "<td style='padding: 5px;'><a href='https://twitter.com/tweet?url=https://si-o-02-bioinfo.shinyapps.io/oligopeptides_matching/' target='_blank'><i class='fab fa-twitter fa-lg'></i></a></td>",
         "<td style='padding: 5px;'><a href='https://www.instagram.com/' target='_blank'><i class='fab fa-instagram fa-lg'></i></a></td>",
         "<td style='padding: 5px;'><a href='http://www.linkedin.com/shareArticle?url=https://si-o-02-bioinfo.shinyapps.io/oligopeptides_matching/' target='_blank'><i class='fab fa-linkedin fa-lg'></i></a></td>",
+        "<td style='padding: 5px;'><a href='https://plus.google.com/' target='_blank'><i class='fab fa-google-plus fa-lg'></i></a></td>",
         "</tr>",
         "</table>",
         "<br>")
@@ -270,7 +271,6 @@ server <- function(input, output) {
   
   observeEvent(input$Ok, {
     Sys.sleep(2)
-    
   output$view_filter_mz_obs <- renderDT({
     filtered_mz_obs()
   })
