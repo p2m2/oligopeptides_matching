@@ -142,7 +142,7 @@ print(test)
 ## Example 4 : match list with a mz_obs
 ```R
 match_list <- (360.2626, 396.5674, 450,5454)
-test_list <- match_list_mz_obs(match_list, 'already_charged', combined_compounds, ppm_error = 700)
+test_list <- match_list_mz_obs(match_list, 'already_charged', combined_compounds)
 print(test_list)
 ```
 
