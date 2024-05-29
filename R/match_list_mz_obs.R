@@ -9,6 +9,7 @@ match_list_mz_obs <- function(list_mz_obs, # contient les mz, name, rt
                               combined_compounds,
                               ppm_error=5
                          ) {
+  ppm_error <- 0
   data_list <- data.frame()
   for (mz_obs in list_mz_obs) { 
     match_mass <- match_mz_obs(mz_obs, ionization, combined_compounds, ppm_error)
