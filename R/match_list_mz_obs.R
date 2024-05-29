@@ -1,5 +1,8 @@
 #
-
+# Boucle sur la liste mz_obs
+# appel à la fonction match_mz_obs 
+# rbind : pour ajouter les résultats 
+# Sélection des colonnes
 
 match_list_mz_obs <- function(name_combination,
                               list_mz_obs,
