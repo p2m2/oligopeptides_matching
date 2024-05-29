@@ -135,10 +135,17 @@ combined_compounds <- get_combination_compounds(
 
 mz_obs <- 360.2626
 test <- match_mz_obs(mz_obs, 'already_charged', combined_compounds, ppm_error = 700)
+print(test)
 
 ```
 
 ## Example 4 : match list with a mz_obs
+```R
+match_list <- (360.2626, 396.5674, 450,5454)
+test_list <- match_list_mz_obs(match_list, 'already_charged', combined_compounds, ppm_error = 700)
+print(test_list)
+```
+
 ## R Shiny
 
 ### Running example
