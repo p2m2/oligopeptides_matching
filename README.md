@@ -147,6 +147,9 @@ list_mz_obs <- data.frame(
      rt = c(10.5, 20.6, 30.7)
  )
 list_mz_obs
+test <- match_list_mz_obs(list_mz_obs, 'already_charged', combined_compounds, ppm_error = 700)
+print(test)
+
 ```
 
 ## R Shiny
