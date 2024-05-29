@@ -28,4 +28,3 @@ match_list_mz_obs <- function(list_mz_obs,  # contient les mz, name, rt
   results <- dplyr::select(results, name, rt, mz, mz_obs, mass, ppm_error_value)
   return(results)
 }  
-  
