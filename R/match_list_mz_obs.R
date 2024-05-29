@@ -15,6 +15,6 @@ match_list_mz_obs <- function(list_mz_obs, # contient les mz, name, rt
     data_list <- rbind(data_list, match_mass)
     
   }
-  data_list <- dplyr::select(name_combination, list_mz_obs, rt, mz, mass, ppm_error_value)
+  data_list <- dplyr::select(list_mz_obs, mz, mass, ppm_error_value)
       return(data_list)
   }
