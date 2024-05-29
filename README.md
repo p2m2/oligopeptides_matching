@@ -129,7 +129,7 @@ combined_compounds <- get_combination_compounds(
                           )
                           
 ```
-## Example 3 : match a mz_obs with the caculated list 
+## Example 3 : match a mz_obs with the calculated list 
 
 ```R
 
