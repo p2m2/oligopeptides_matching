@@ -151,7 +151,7 @@ match_list_mz_obs(example_list_mz_obs, 'already_charged', combined_compounds, pp
 
 ```
 
-# Hint : if it doesn't work , try to re-charge the packages like dplyr
+# Hint : if it doesn't work , try to re-charge the packages like dplyr and the ones at the beginning.
 
 ## R Shiny
 
