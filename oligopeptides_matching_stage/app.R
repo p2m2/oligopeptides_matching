@@ -154,9 +154,6 @@ ui <- dashboardPage(
                                              Semicolon = ";",
                                              Tab = "\t"),
                                  selected = ","),
-                    uiOutput("name_column_ui"),
-                    uiOutput("mz_column_ui"),
-                    uiOutput("RT_column_ui"),
                     numericInput("name_column", "Enter the column number of feature name:", value = 1),
                     numericInput("mz_column", "Enter the column number of m/z:", value = 2),
                     numericInput("RT_column", "Enter the column number of RT:", value = 3),
@@ -303,39 +300,15 @@ server <- function(input, output) {
     df
   })
   
-  observeEvent({
+  observeEvent(input$update, {
+    output$files <- renderTable({
       req(data())
       df <- data()
-      updateSelectInput(session, "name_column", choices = colnames(df))
-      updateSelectInput(session, "mz_column", choices = colnames(df))
-      updateSelectInput(session, "RT_column", choices = colnames(df))
+      selection <- df[, c(input$name_column, input$mz_column, input$RT_column)]
+      colnames(selection) <- c("name", "mz", "RT")
+      selection
     })
     
-    output$name_column_ui <- renderUI({
-      req(data())
-      selectInput("name_column", "Select the column for feature name:", choices = NULL)
-    })
-    
-    output$mz_column_ui <- renderUI({
-      req(data())
-      selectInput("mz_column", "Select the column for m/z:", choices = NULL)
-    })
-    
-    output$RT_column_ui <- renderUI({
-      req(data())
-      selectInput("RT_column", "Select the column for RT:", choices = NULL)
-    })
-    
-    observeEvent(input$update, {
-      output$files <- renderTable({
-        req(data())
-        df <- data()
-        req(input$name_column, input$mz_column, input$RT_column)
-        selection <- df[, c(input$name_column, input$mz_column, input$RT_column)]
-        colnames(selection) <- c("name", "mz", "RT")
-        selection
-      })
-      
     output$view_match <- DT::renderDataTable({
       req(data())
       df <- data()
@@ -343,6 +316,7 @@ server <- function(input, output) {
       colnames(selection) <- c("name", "mz", "RT")
       datatable(selection)
     })
+    
     
     output$downloadDataList <- downloadHandler(
       filename = function() {
