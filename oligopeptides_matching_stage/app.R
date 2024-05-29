@@ -154,6 +154,10 @@ ui <- dashboardPage(
                                              Semicolon = ";",
                                              Tab = "\t"),
                                  selected = ","),
+                    # radioButtons("disp", "Display",
+                    #              choices = c(Head = "head",
+                    #                          All = "all"),
+                    #              selected = "head"),
                     numericInput("name_column", "Enter the column number of feature name:", value = 1),
                     numericInput("mz_column", "Enter the column number of m/z:", value = 2),
                     numericInput("RT_column", "Enter the column number of RT:", value = 3),
@@ -170,7 +174,8 @@ ui <- dashboardPage(
                       condition = "input.update > 0",
                       withSpinner(DT::dataTableOutput("view_match"))
                     )
-                  )
+                  ),
+                  position = "right"
                 )
               )
       )
@@ -181,7 +186,6 @@ ui <- dashboardPage(
       #                       frameborder = 0, scrolling = 'auto'
       #           )
       #         )
-      # )
     )
   )
 )
@@ -278,8 +282,8 @@ server <- function(input, output) {
     filename = function() {
       paste(input$file1, ".csv", sep = "")
     },
-    content = function(file1) {
-      write.csv(datasetInput(), file1, row.names = FALSE)
+    content = function(file) {
+      write.csv(datasetInput(), file, row.names = FALSE)
     }
   )
   # match_res <- eventReactive(input$update, {
@@ -301,19 +305,21 @@ server <- function(input, output) {
   })
   
   observeEvent(input$update, {
-    output$files <- renderTable({
-      req(data())
-      df <- data()
-      selection <- df[, c(input$name_column, input$mz_column, input$RT_column)]
-      colnames(selection) <- c("name", "mz", "RT")
-      selection
-    })
-    
     output$view_match <- DT::renderDataTable({
       req(data())
       df <- data()
       selection <- df[, c(input$name_column, input$mz_column, input$RT_column)]
       colnames(selection) <- c("name", "mz", "RT")
+      selection$name_combination <- NA
+      selection$mz_obs <- NA
+      selection$mass <- NA
+      selection$ppm_error_value <- NA
+      # if (input$filtered_mz_obs == "" || is.na(input$filtered_mz_obs)) {
+      #   return(data.frame())
+      # } else {
+      #   matching <- subset(selection, mz == input$filtered_mz_obs)
+      #   return(matching)
+      # }
       datatable(selection)
     })
     
@@ -327,6 +333,11 @@ server <- function(input, output) {
         df <- data()
         selection <- df[, c(input$name_column, input$mz_column, input$RT_column)]
         colnames(selection) <- c("name", "mz", "RT")
+        selection$name_combination <- NA
+        selection$mz_obs <- NA
+        selection$mass <- NA
+        selection$ppm_error_value <- NA
+        
         write.csv(selection, file, row.names = FALSE)
       }
     )
