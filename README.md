@@ -138,6 +138,7 @@ test <- match_mz_obs(mz_obs, 'already_charged', combined_compounds, ppm_error = 
 
 ```
 
+## Example 4 : match list with a mz_obs
 ## R Shiny
 
 ### Running example
