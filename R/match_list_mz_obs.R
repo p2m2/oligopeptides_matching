@@ -9,13 +9,12 @@ match_list_mz_obs <- function(list_mz_obs, # contient les mz, name, rt
                               combined_compounds,
                               ppm_error=5
                          ) {
-  ppm_error <- 0
-  data_list <- data.frame()
+  data_list <- list()
   for (mz_obs in list_mz_obs) { 
     match_mass <- match_mz_obs(mz_obs, ionization, combined_compounds, ppm_error)
     data_list <- rbind(data_list, match_mass)
     
   }
-  data_list <- dplyr::select(list_mz_obs, mz, mass, ppm_error_value)
+  data_list <- dplyr::select(data_list, mz, mass, ppm_error_value)
       return(data_list)
   }
