@@ -1,4 +1,4 @@
-#
+# définir la fonction avec ses paramètres
 # Boucle sur la liste mz_obs
 # appel à la fonction match_mz_obs 
 # rbind : pour ajouter les résultats 
