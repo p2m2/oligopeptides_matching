@@ -141,9 +141,12 @@ print(test)
 
 ## Example 4 : match list with a mz_obs
 ```R
-match_list <- (360.2626, 396.5674, 450,5454)
-test_list <- match_list_mz_obs(match_list, ionization = 'already_charged', combined_compounds)
-print(test_list)
+list_mz_obs <- data.frame(
+     name = c("M954t1417", "M100T50", "M121T93"),
+     mz = c(953.6798, 100.07, 120.9659),
+     rt = c(10.5, 20.6, 30.7)
+ )
+list_mz_obs
 ```
 
 ## R Shiny
