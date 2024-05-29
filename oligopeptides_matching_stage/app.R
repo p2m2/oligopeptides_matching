@@ -154,6 +154,9 @@ ui <- dashboardPage(
                                              Semicolon = ";",
                                              Tab = "\t"),
                                  selected = ","),
+                    uiOutput("name_column_ui"),
+                    uiOutput("mz_column_ui"),
+                    uiOutput("RT_column_ui"),
                     numericInput("name_column", "Enter the column number of feature name:", value = 1),
                     numericInput("mz_column", "Enter the column number of m/z:", value = 2),
                     numericInput("RT_column", "Enter the column number of RT:", value = 3),
@@ -187,9 +190,7 @@ ui <- dashboardPage(
 )
 
 server <- function(input, output) {
-  myCSV <- reactive({
-    read.csv(input$file1)
-  })
+  
   # selected_columns <- eventReactive(input$Ok, {
   #   columns <- input$columns
   #   if (is.null(columns)) {
@@ -292,9 +293,69 @@ server <- function(input, output) {
   #   )
   #   as.data.frame(matching)
   # }) 
+  # 
+  # output$view_match <- renderDT({
+  #   filtered_mz_obs()
+  # })
+  data <- reactive({
+    req(input$file1)
+    df <- read.csv(input$file1$datapath, header = input$header, sep = input$sep)
+    df
+  })
   
-  output$view_match <- renderDT({
-    filtered_mz_obs()
+  observeEvent({
+      req(data())
+      df <- data()
+      updateSelectInput(session, "name_column", choices = colnames(df))
+      updateSelectInput(session, "mz_column", choices = colnames(df))
+      updateSelectInput(session, "RT_column", choices = colnames(df))
+    })
+    
+    output$name_column_ui <- renderUI({
+      req(data())
+      selectInput("name_column", "Select the column for feature name:", choices = NULL)
+    })
+    
+    output$mz_column_ui <- renderUI({
+      req(data())
+      selectInput("mz_column", "Select the column for m/z:", choices = NULL)
+    })
+    
+    output$RT_column_ui <- renderUI({
+      req(data())
+      selectInput("RT_column", "Select the column for RT:", choices = NULL)
+    })
+    
+    observeEvent(input$update, {
+      output$files <- renderTable({
+        req(data())
+        df <- data()
+        req(input$name_column, input$mz_column, input$RT_column)
+        selection <- df[, c(input$name_column, input$mz_column, input$RT_column)]
+        colnames(selection) <- c("name", "mz", "RT")
+        selection
+      })
+      
+    output$view_match <- DT::renderDataTable({
+      req(data())
+      df <- data()
+      selection <- df[, c(input$name_column, input$mz_column, input$RT_column)]
+      colnames(selection) <- c("name", "mz", "RT")
+      datatable(selection)
+    })
+    
+    output$downloadDataList <- downloadHandler(
+      filename = function() {
+        paste("matched_mz_list", ".csv", sep = "")
+      },
+      content = function(file) {
+        req(data())
+        df <- data()
+        selection <- df[, c(input$name_column, input$mz_column, input$RT_column)]
+        colnames(selection) <- c("name", "mz", "RT")
+        write.csv(selection, file, row.names = FALSE)
+      }
+    )
   })
 }
 
