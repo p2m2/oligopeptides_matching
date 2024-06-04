@@ -53,7 +53,7 @@ ui <- dashboardPage(
       tabItem(tabName = "home",
               h2("Welcome to the Home Page !"),
               tagList(
-                includeMarkdown("welcome.md")
+                includeMarkdown("C:\\Données\\Sirine OUEIDA 2024\\GIT\\oligopeptides_matching\\oligopeptides_matching_stage\\docs\\welcome.md")
               )
       ),
       # tabItem(tabName = "AminoAcidandMass",
@@ -220,10 +220,10 @@ server <- function(input, output) {
     as.data.frame(oligopeptides)
   })
   
-  output$results <- renderDT({
-    filter_od <- filtered_results()
-    DT::datatable(filter_od)
-  })
+  # output$results <- renderDT({
+  #   filter_od <- filtered_results()
+  #   DT::datatable(filter_od)
+  # })
  
   # output$results <- renderDT({
   #   filter_od <- filtered_results()
@@ -275,17 +275,17 @@ server <- function(input, output) {
     Sys.sleep(2)
   output$view_filter_mz_obs <- renderDT({
     filtered_mz_obs()
-  })
+    })
   })
   
-  output$downloadData <- downloadHandler(
-    filename = function() {
-      paste(input$file1, ".csv", sep = "")
-    },
-    content = function(file) {
-      write.csv(datasetInput(), file, row.names = FALSE)
-    }
-  )
+  # output$downloadData <- downloadHandler(
+  #   filename = function() {
+  #     paste(input$file1, ".csv", sep = "")
+  #   },
+  #   content = function(file) {
+  #     write.csv(datasetInput(), file, row.names = FALSE)
+  #   }
+  # )
   # match_res <- eventReactive(input$update, {
   #   req(input$od)
   #   matching <- match_mz_obs(
