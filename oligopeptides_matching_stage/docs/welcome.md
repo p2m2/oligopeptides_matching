@@ -1,5 +1,8 @@
 <img src="C:/Données/Sirine OUEIDA 2024/GIT/oligopeptides_matching/oligopeptides_matching_stage/docs/shiny_logo.png" alt = "Drawing", style="width: 200px;">
 
+<https://raw.githubusercontent.com/p2m2/oligopeptides_matching/stage-m1-2024-2/oligopeptides_matching_stage/docs/shiny_logo.png, alt = "Drawing", style="width: 200px;">
+
+
 [![p2m2](https://circleci.com/gh/p2m2/oligopeptides_matching.svg?style=shield)](https://app.circleci.com/pipelines/github/p2m2)
 [![](https://img.shields.io/badge/stable-shinyapps.io-blue?style=flat&labelColor=white&logo=RStudio&logoColor=blue)](https://p2m2.shinyapps.io/oligopeptides_matching/) 
 
@@ -40,7 +43,6 @@ document()
 if the installation and "document" thing doesn't work, try to run each script and then try the examples below. 
 
 # Data
-
 PhenolExplorer_DB.xlsx is an excel file containing data from the website http://phenol-explorer.eu. Phenol-Explorer is the first comprehensive database for polyphenol content in foods. INRA developped Phenol-Explorer in partnership with **AFSSA, the University of Alberta, the University of Barcelona, the IARC, and Siliflo.**
 This research was made possible by financial support from the French Governement, the National Cancer Institute (France), Unilever, Danone, and Nestle.
 
