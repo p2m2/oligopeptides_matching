@@ -1,7 +1,6 @@
-<img src="C:/Données/Sirine OUEIDA 2024/GIT/oligopeptides_matching/oligopeptides_matching_stage/docs/shiny_logo.png" alt = "Drawing", style="width: 200px;">
-
-<img src="https://github.com/p2m2/oligopeptides_matching/blob/stage-m1-2024-2/oligopeptides_matching_stage/docs/shiny_logo.png alt = "Drawing", style="width: 200px;">
-
+<p style="text-align: center;">
+  <img src="shiny_logo.png" alt ="Shiny logo" width="200">
+</p>
 
 
 [![p2m2](https://circleci.com/gh/p2m2/oligopeptides_matching.svg?style=shield)](https://app.circleci.com/pipelines/github/p2m2)
