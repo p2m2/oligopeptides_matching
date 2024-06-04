@@ -9,7 +9,7 @@ library(oligopeptidesMatching)
 library(shinycssloaders)
 library(dplyr)
 
-source("https://raw.githubusercontent.com/p2m2/oligopeptides_matching/develop/oligopeptides_matching/data.R")
+#source("https://raw.githubusercontent.com/p2m2/oligopeptides_matching/develop/oligopeptides_matching/data.R")
 
 
 ui <- dashboardPage(
