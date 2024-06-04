@@ -13,6 +13,7 @@ source("https://raw.githubusercontent.com/p2m2/oligopeptides_matching/develop/ol
 
 
 ui <- dashboardPage(
+  skin = "red",
   dashboardHeader(title = "Oligopeptides Matching", titleWidth = 250),
   dashboardSidebar(
     width = 250,
@@ -178,14 +179,13 @@ ui <- dashboardPage(
                   position = "right"
                 )
               )
-      )
-      # tabItem(tabName = "about",
-      #         fluidPage(
-      #           tags$iframe(src = 'https://github.com/p2m2/oligopeptides_matching/tree/stage-m1-2024-2/README.Rmd',
-      #                       width = '100%', height = '800px',
-      #                       frameborder = 0, scrolling = 'auto'
-      #           )
-      #         )
+      ),
+      tabItem(tabName = "feedback",
+              fluidPage(
+                includeMarkdown("C:\\Données\\Sirine OUEIDA 2024\\GIT\\oligopeptides_matching\\oligopeptides_matching_stage\\docs\\feedback_user.md"), 
+                actionButton("submit_feedback", "Submit", style = "color: white; background-color: #007bff; border-color: #007bff;")
+                )
+              )
     )
   )
 )
