@@ -25,6 +25,7 @@ polarity <- c("Non-polaire", "Non-polaire", "Charge Negative", "Charge Negative"
 
 aa_mw <- data.frame(Full_Name = full_name, Symbol = symbol, Amino_Acid = aa, Mass = mass_aa, Specification_AA = polarity)
 
+print(aa_mw)
 
 ### polyphenol list
 name_polyphenol <- c("Cyanidin",
@@ -37,6 +38,7 @@ name_polyphenol <- c("Cyanidin",
 mass_polyphenol <- c(287.244, 611.525,491.422, 491.422, 611.527)
 
 polyphenols <- setNames(mass_polyphenol, name_polyphenol)
+print(polyphenols)
 
 ### Compute the chemical_derivation
 #### Atomic exact mass
@@ -75,3 +77,5 @@ mass_chemical_derivation <- c(reduction, methylation, hydroxylation,
                               glucuronidation_methylation, glucuronidation_hydroxylation, rutinosylation)
 
 chemical_derivation <- setNames(mass_chemical_derivation, name_chemical_derivation)
+print(str(chemical_derivation))
+
