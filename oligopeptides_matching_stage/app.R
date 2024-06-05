@@ -191,7 +191,22 @@ ui <- dashboardPage(
 )
 
 server <- function(input, output) {
+
+  # Pour Onglet : Amino acid assemblies
+  filtered_results <- eventReactive(input$calculate, {
+    req(input$od_1)
+    oligopeptides <- get_oligopeptides(
+      aminoacids = aa_mw,
+      oligomerization_degree = input$od_1
+    )
+    as.data.frame(oligopeptides)
+  })
   
+  output$results <- renderDT({
+    filter_od <- filtered_results()
+    DT::datatable(filter_od)
+  })
+  #Pour Onlglet Amino acid and mass
   # selected_columns <- eventReactive(input$Ok, {
   #   columns <- input$columns
   #   if (is.null(columns)) {
@@ -211,19 +226,7 @@ server <- function(input, output) {
   #       fontWeight = 'bold'
   #     )
   # })
-  filtered_results <- eventReactive(input$calculate, {
-    req(input$od_1)
-    oligopeptides <- get_oligopeptides(
-      aminoacids = aa_mw,
-      oligomerization_degree = input$od_1
-    )
-    as.data.frame(oligopeptides)
-  })
-  
-  # output$results <- renderDT({
-  #   filter_od <- filtered_results()
-  #   DT::datatable(filter_od)
-  # })
+ 
  
   # output$results <- renderDT({
   #   filter_od <- filtered_results()
@@ -232,6 +235,7 @@ server <- function(input, output) {
   #   DT::datatable(filter_od)
   # })
   
+  #Pour Onlglet Combination AA Polyphenol
   combination_compounds <- reactive({
     req(input$od)
     aaa_combined <- get_oligopeptides(
@@ -253,6 +257,7 @@ server <- function(input, output) {
     combination_compounds()
   })
   
+  #Pour Onlglet match single mz
   filtered_mz_obs <- reactive({
     req(input$mz_obs, input$ppm_error)
     data <- match_mz_obs(
@@ -298,6 +303,8 @@ server <- function(input, output) {
   # output$view_match <- renderDT({
   #   filtered_mz_obs()
   # })
+  
+  #Pour Onglet Match list mz
   data <- reactive({
     req(input$file1)
     df <- read.csv(input$file1$datapath, header = input$header, sep = input$sep)
