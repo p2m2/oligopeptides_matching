@@ -4,7 +4,7 @@
 full_name <- c("Alanine", "Cysteine", "Aspartic acid", "Glutamic acid", "Phenylalanine", "Glycine", "Histidine", "Isoleucine", "Lysine", "Leucine", "Methionine", "Asparagine", "Proline", "Glutamine", "Arginine", "Serine", "Threonine", "Valine", "Tryptophan", "Tyrosine") 
 
 #Symbole à 3 lettres 
-symbol <- c("Ala", "Cys", "Asp", "Glu", "Phe", "Gly", "His", "Ile", "Lys", "Leu", "Met", "Asn", "Pro", "Gln", "Arg", "Ser", "Thr", "Val", "Trp", "Tyr")
+symbol <- c(Ala, Cys, Asp, Glu, Phe, Gly, His, Ile, Lys, Leu, Met, Asn, Pro, Gln, Arg, Ser, Thr, Val, Trp, Tyr)
 
 aa <- c("A", "C", "D", "E", "F", "G", "H", "I", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "Y")
 mass_aa <- c(89.047679, 121.019751, 133.037509, 147.053159, 165.078979, 
@@ -13,11 +13,11 @@ mass_aa <- c(89.047679, 121.019751, 133.037509, 147.053159, 165.078979,
              105.042594,119.058244, 117.078979,204.089878, 181.073894)
 
 # Polarity of each amino acid
-polarity <- c("Non-polaire", "Non-polaire", "Charge Negative", "Charge Negative", 
-              "Non-polaire", "Non-polaire", "Charge Positive", "Non-polaire", 
-              "Charge Positive", "Non-polaire", "Non-polaire", "Polaire", 
-              "Non-polaire", "Polaire", "Charge Positive", "Polaire", 
-              "Polaire", "Non-polaire", "Non-polaire", "Polaire")
+polarity <- c(Non-polaire, Non-polaire, Charge_Negative, Charge_Negative, 
+              Non-polaire, Non-polaire, Charge_Positive, Non-polaire, 
+              Charge_Positive, Non-polaire, Non-polaire, Polaire, 
+              Non-polaire, Polaire, Charge_Positive, Polaire, 
+              Polaire, Non-polaire, Non-polaire, Polaire)
 
 aa_mw <- data.frame(Full_Name = full_name, Symbol = symbol, Amino_Acid = aa, Mass = mass_aa, Specification_AA = polarity)
 
