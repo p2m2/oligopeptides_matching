@@ -10,7 +10,8 @@ library(shinycssloaders)
 library(dplyr)
 
 #source("https://raw.githubusercontent.com/p2m2/oligopeptides_matching/develop/oligopeptides_matching/data.R")
-
+source("C:\\Données\\Sirine OUEIDA 2024\\GIT\\oligopeptides_matching\\oligopeptides_matching\\data.R")
+print(str(aa_mw))
 
 ui <- dashboardPage(
   skin = "red",
@@ -201,7 +202,7 @@ server <- function(input, output) {
     }
   })
   output$amino_acid_table <- renderDataTable({
-    datatable(aa_mw[, selected_columns()], rownames = FALSE, options = list(paging = FALSE)) %>%
+    datatable(aa_mw[, selected_columns(), drop = FALSE], rownames = FALSE, options = list(paging = FALSE)) %>%
       formatStyle(
         'Specification_AA',
         backgroundColor = styleEqual(
