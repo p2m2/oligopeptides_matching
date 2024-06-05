@@ -78,4 +78,3 @@ mass_chemical_derivation <- c(reduction, methylation, hydroxylation,
 
 chemical_derivation <- setNames(mass_chemical_derivation, name_chemical_derivation)
 print(str(chemical_derivation))
-
