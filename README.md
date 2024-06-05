@@ -147,7 +147,7 @@ example_list_mz_obs <- data.frame(
      rt = c(10.5, 20.6, 30.7)
  )
  
-match_list_mz_obs(example_list_mz_obs, 'already_charged', combined_compounds, ppm_error = 10)
+match_list_mz_obs(example_list_mz_obs$mz, 'already_charged', combined_compounds, ppm_error = 10)
 
 ```
 
