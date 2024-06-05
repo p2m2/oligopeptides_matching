@@ -10,8 +10,7 @@ library(shinycssloaders)
 library(dplyr)
 
 #source("https://raw.githubusercontent.com/p2m2/oligopeptides_matching/develop/oligopeptides_matching/data.R")
-source("C:\\Données\\Sirine OUEIDA 2024\\GIT\\oligopeptides_matching\\oligopeptides_matching\\data.R")
-print(str(aa_mw))
+
 
 ui <- dashboardPage(
   skin = "red",
@@ -21,7 +20,7 @@ ui <- dashboardPage(
     tags$style(HTML(".share-buttons { text-align: center; margin-top: 20px; }" )),
     sidebarMenu(
       menuItem("Home", tabName = "home", icon = icon("home")),
-      menuItem("Amino Acid and Mass", tabName = "AminoAcidandMass"),
+      #menuItem("Amino Acid and Mass", tabName = "AminoAcidandMass"),
       menuItem("Amino-acid assemblies", tabName = "assemblies", icon = icon("calculator")),
       menuItem("Combination AA Polyphenol", tabName = "CombinationAApolyphenol"),
       menuItem("Match a single mz", tabName = "Matchasinglemz"),
@@ -29,60 +28,60 @@ ui <- dashboardPage(
       menuItem("About", tabName = "about", icon = icon("question")),
       menuItem("Feedback", tabName = "feedback", icon = icon("envelope"))
     ),
-  #   tags$div(
-  #     class = "share-buttons",
-  #     tags$a(href = "https://www.facebook.com/sharer/sharer.php?u=https://si-o-02-bioinfo.shinyapps.io/oligopeptides_matching/", target = "_blank", icon("facebook")),
-  #     tags$a(href = "https://twitter.com/intent/tweet?url=https://si-o-02-bioinfo.shinyapps.io/oligopeptides_matching/", target = "_blank", icon("twitter")),
-  #     tags$a(href = "https://www.linkedin.com/shareArticle?url=https://si-o-02-bioinfo.shinyapps.io/oligopeptides_matching/", target = "_blank", icon("linkedin")),
-  #   )
-  # ),
-      HTML(paste0(
-        "<br><br><br><br><br><br><br><br><br>",
-        "<table style='margin-left:auto; margin-right:auto; '>",
-        "<tr>",
-        "<td style='padding: 5px;'><a href='https://www.facebook.com/sharer/sharer.php?u=https://si-o-02-bioinfo.shinyapps.io/oligopeptides_matching/' target='_blank'><i class='fab fa-facebook-square fa-lg'></i></a></td>",
-        "<td style='padding: 5px;'><a href='https://twitter.com/tweet?url=https://si-o-02-bioinfo.shinyapps.io/oligopeptides_matching/' target='_blank'><i class='fab fa-twitter fa-lg'></i></a></td>",
-        "<td style='padding: 5px;'><a href='https://www.instagram.com/' target='_blank'><i class='fab fa-instagram fa-lg'></i></a></td>",
-        "<td style='padding: 5px;'><a href='http://www.linkedin.com/shareArticle?url=https://si-o-02-bioinfo.shinyapps.io/oligopeptides_matching/' target='_blank'><i class='fab fa-linkedin fa-lg'></i></a></td>",
-        "<td style='padding: 5px;'><a href='https://plus.google.com/' target='_blank'><i class='fab fa-google-plus fa-lg'></i></a></td>",
-        "</tr>",
-        "</table>",
-        "<br>")
-      )
+    #   tags$div(
+    #     class = "share-buttons",
+    #     tags$a(href = "https://www.facebook.com/sharer/sharer.php?u=https://si-o-02-bioinfo.shinyapps.io/oligopeptides_matching/", target = "_blank", icon("facebook")),
+    #     tags$a(href = "https://twitter.com/intent/tweet?url=https://si-o-02-bioinfo.shinyapps.io/oligopeptides_matching/", target = "_blank", icon("twitter")),
+    #     tags$a(href = "https://www.linkedin.com/shareArticle?url=https://si-o-02-bioinfo.shinyapps.io/oligopeptides_matching/", target = "_blank", icon("linkedin")),
+    #   )
+    # ),
+    HTML(paste0(
+      "<br><br><br><br><br><br><br><br><br>",
+      "<table style='margin-left:auto; margin-right:auto; '>",
+      "<tr>",
+      "<td style='padding: 5px;'><a href='https://www.facebook.com/sharer/sharer.php?u=https://si-o-02-bioinfo.shinyapps.io/oligopeptides_matching/' target='_blank'><i class='fab fa-facebook-square fa-lg'></i></a></td>",
+      "<td style='padding: 5px;'><a href='https://twitter.com/tweet?url=https://si-o-02-bioinfo.shinyapps.io/oligopeptides_matching/' target='_blank'><i class='fab fa-twitter fa-lg'></i></a></td>",
+      "<td style='padding: 5px;'><a href='https://www.instagram.com/' target='_blank'><i class='fab fa-instagram fa-lg'></i></a></td>",
+      "<td style='padding: 5px;'><a href='http://www.linkedin.com/shareArticle?url=https://si-o-02-bioinfo.shinyapps.io/oligopeptides_matching/' target='_blank'><i class='fab fa-linkedin fa-lg'></i></a></td>",
+      "<td style='padding: 5px;'><a href='https://plus.google.com/' target='_blank'><i class='fab fa-google-plus fa-lg'></i></a></td>",
+      "</tr>",
+      "</table>",
+      "<br>")
+    )
   ),
   dashboardBody(
     tabItems(
       tabItem(tabName = "home",
               h2("Welcome to the Home Page !"),
               tagList(
-                includeMarkdown("C:\\Données\\Sirine OUEIDA 2024\\GIT\\oligopeptides_matching\\oligopeptides_matching_stage\\docs\\welcome.md")
+                includeMarkdown("welcome.md")
               )
       ),
-      tabItem(tabName = "AminoAcidandMass",
-              fluidRow(
+      # tabItem(tabName = "AminoAcidandMass",
+      #         fluidRow(
+      #           sidebarLayout(
+      #             sidebarPanel(
+      #               style = "width: 200px;",
+      #               checkboxGroupInput("columns",
+      #                                  label = "Select columns to display:",
+      #                                  choices = c("Full_Name", "Symbol", "Amino_Acid", "Mass", "Specification_AA")
+      #               ),
+      #               actionButton("Ok", label = "Ok", style = "color: white; background-color: #007bff; border-color: #007bff;")
+      #             ),
+      #             mainPanel(
+      #               style = "right: 40px;",
+      #               dataTableOutput("amino_acid_table")
+      #             ),
+      #             position = "right"
+      #           )
+      #         )
+      # ),
+      tabItem(tabName = "assemblies",
+              fluidPage(
                 sidebarLayout(
                   sidebarPanel(
-                    style = "width: 200px;",
-                    checkboxGroupInput("columns",
-                                       label = "Select columns to display:",
-                                       choices = c("Full_Name", "Symbol", "Amino_Acid", "Mass", "Specification_AA")
-                    ),
-                    actionButton("Ok", label = "Ok", style = "color: white; background-color: #007bff; border-color: #007bff;")
-                  ),
-                  mainPanel(
-                    style = "right: 40px;",
-                    dataTableOutput("amino_acid_table")
-                  ),
-                  position = "right"
-                )
-              )
-      ),
-        tabItem(tabName = "assemblies",
-              fluidPage(
-                  sidebarLayout(
-                    sidebarPanel(
-                      numericInput("od_1", "Oligomerization degree:", value = 1, min = 1),
-                      actionButton("calculate", "Calculate", style = "color: white; background-color: #007bff; border-color: #007bff;")
+                    numericInput("od_1", "Oligomerization degree:", value = 1, min = 1),
+                    actionButton("calculate", "Calculate", style = "color: white; background-color: #007bff; border-color: #007bff;")
                   ),
                   mainPanel(
                     h3("Amino-acid assemblies"),
@@ -92,8 +91,8 @@ ui <- dashboardPage(
                     )
                   ),
                   position = "right"
-                  )
                 )
+              )
       ),
       tabItem(tabName = "CombinationAApolyphenol",
               fluidPage(
@@ -180,38 +179,39 @@ ui <- dashboardPage(
                   position = "right"
                 )
               )
-      ),
-      tabItem(tabName = "feedback",
-              fluidPage(
-                includeMarkdown("C:\\Données\\Sirine OUEIDA 2024\\GIT\\oligopeptides_matching\\oligopeptides_matching_stage\\docs\\feedback_user.md"), 
-                actionButton("submit_feedback", "Submit", style = "color: white; background-color: #007bff; border-color: #007bff;")
-                )
-              )
+      )
+      # tabItem(tabName = "about",
+      #         fluidPage(
+      #           tags$iframe(src = 'https://github.com/p2m2/oligopeptides_matching/tree/stage-m1-2024-2/README.Rmd',
+      #                       width = '100%', height = '800px',
+      #                       frameborder = 0, scrolling = 'auto'
+      #           )
+      #         )
     )
   )
 )
 
 server <- function(input, output) {
-
-  selected_columns <- eventReactive(input$Ok, {
-    columns <- input$columns
-    if (is.null(columns)) {
-      names(aa_mw)
-    } else {
-      columns
-    }
-  })
-  output$amino_acid_table <- renderDataTable({
-    datatable(aa_mw[, selected_columns(), drop = FALSE], rownames = FALSE, options = list(paging = FALSE)) %>%
-      formatStyle(
-        'Specification_AA',
-        backgroundColor = styleEqual(
-          unique(aa_mw$Specification_AA),
-          c('Non-polaire' = 'lightyellow', 'Polaire' = 'skyblue', 'Charge Negative' = 'orchid', 'Charge Positive' = 'palegreen')
-        ),
-        fontWeight = 'bold'
-      )
-  })
+  
+  # selected_columns <- eventReactive(input$Ok, {
+  #   columns <- input$columns
+  #   if (is.null(columns)) {
+  #     names(aa_mw)
+  #   } else {
+  #     columns
+  #   }
+  # })
+  # output$amino_acid_table <- renderDataTable({
+  #   datatable(aa_mw[, selected_columns()], rownames = FALSE, options = list(paging = FALSE)) %>%
+  #     formatStyle(
+  #       'Specification_AA',
+  #       backgroundColor = styleEqual(
+  #         unique(aa_mw$Specification_AA),
+  #         c('Non-polaire' = 'lightyellow', 'Polaire' = 'skyblue', 'Charge Negative' = 'orchid', 'Charge Positive' = 'palegreen')
+  #       ),
+  #       fontWeight = 'bold'
+  #     )
+  # })
   filtered_results <- eventReactive(input$calculate, {
     req(input$od_1)
     oligopeptides <- get_oligopeptides(
@@ -221,11 +221,11 @@ server <- function(input, output) {
     as.data.frame(oligopeptides)
   })
   
-  # output$results <- renderDT({
-  #   filter_od <- filtered_results()
-  #   DT::datatable(filter_od)
-  # })
- 
+  output$results <- renderDT({
+    filter_od <- filtered_results()
+    DT::datatable(filter_od)
+  })
+  
   # output$results <- renderDT({
   #   filter_od <- filtered_results()
   #   filter_od <- filter_od %>% 
@@ -274,19 +274,19 @@ server <- function(input, output) {
   
   observeEvent(input$Ok, {
     Sys.sleep(2)
-  output$view_filter_mz_obs <- renderDT({
-    filtered_mz_obs()
+    output$view_filter_mz_obs <- renderDT({
+      filtered_mz_obs()
     })
   })
   
-  # output$downloadData <- downloadHandler(
-  #   filename = function() {
-  #     paste(input$file1, ".csv", sep = "")
-  #   },
-  #   content = function(file) {
-  #     write.csv(datasetInput(), file, row.names = FALSE)
-  #   }
-  # )
+  output$downloadData <- downloadHandler(
+    filename = function() {
+      paste(input$file1, ".csv", sep = "")
+    },
+    content = function(file) {
+      write.csv(datasetInput(), file, row.names = FALSE)
+    }
+  )
   # match_res <- eventReactive(input$update, {
   #   req(input$od)
   #   matching <- match_mz_obs(
@@ -346,3 +346,4 @@ server <- function(input, output) {
 }
 
 shinyApp(ui, server)
+
