@@ -20,7 +20,7 @@ ui <- dashboardPage(
     tags$style(HTML(".share-buttons { text-align: center; margin-top: 20px; }" )),
     sidebarMenu(
       menuItem("Home", tabName = "home", icon = icon("home")),
-      #menuItem("Amino Acid and Mass", tabName = "AminoAcidandMass"),
+      menuItem("Amino Acid and Mass", tabName = "AminoAcidandMass"),
       menuItem("Amino-acid assemblies", tabName = "assemblies", icon = icon("calculator")),
       menuItem("Combination AA Polyphenol", tabName = "CombinationAApolyphenol"),
       menuItem("Match a single mz", tabName = "Matchasinglemz"),
@@ -57,25 +57,25 @@ ui <- dashboardPage(
                 includeMarkdown("C:\\Données\\Sirine OUEIDA 2024\\GIT\\oligopeptides_matching\\oligopeptides_matching_stage\\docs\\welcome.md")
               )
       ),
-      # tabItem(tabName = "AminoAcidandMass",
-      #         fluidRow(
-      #           sidebarLayout(
-      #             sidebarPanel(
-      #               style = "width: 200px;",
-      #               checkboxGroupInput("columns",
-      #                                  label = "Select columns to display:",
-      #                                  choices = c("Full_Name", "Symbol", "Amino_Acid", "Mass", "Specification_AA")
-      #               ),
-      #               actionButton("Ok", label = "Ok", style = "color: white; background-color: #007bff; border-color: #007bff;")
-      #             ),
-      #             mainPanel(
-      #               style = "right: 40px;",
-      #               dataTableOutput("amino_acid_table")
-      #             ),
-      #             position = "right"
-      #           )
-      #         )
-      # ),
+      tabItem(tabName = "AminoAcidandMass",
+              fluidRow(
+                sidebarLayout(
+                  sidebarPanel(
+                    style = "width: 200px;",
+                    checkboxGroupInput("columns",
+                                       label = "Select columns to display:",
+                                       choices = c("Full_Name", "Symbol", "Amino_Acid", "Mass", "Specification_AA")
+                    ),
+                    actionButton("Ok", label = "Ok", style = "color: white; background-color: #007bff; border-color: #007bff;")
+                  ),
+                  mainPanel(
+                    style = "right: 40px;",
+                    dataTableOutput("amino_acid_table")
+                  ),
+                  position = "right"
+                )
+              )
+      ),
         tabItem(tabName = "assemblies",
               fluidPage(
                   sidebarLayout(
@@ -191,26 +191,26 @@ ui <- dashboardPage(
 )
 
 server <- function(input, output) {
-  
-  # selected_columns <- eventReactive(input$Ok, {
-  #   columns <- input$columns
-  #   if (is.null(columns)) {
-  #     names(aa_mw)
-  #   } else {
-  #     columns
-  #   }
-  # })
-  # output$amino_acid_table <- renderDataTable({
-  #   datatable(aa_mw[, selected_columns()], rownames = FALSE, options = list(paging = FALSE)) %>%
-  #     formatStyle(
-  #       'Specification_AA',
-  #       backgroundColor = styleEqual(
-  #         unique(aa_mw$Specification_AA),
-  #         c('Non-polaire' = 'lightyellow', 'Polaire' = 'skyblue', 'Charge Negative' = 'orchid', 'Charge Positive' = 'palegreen')
-  #       ),
-  #       fontWeight = 'bold'
-  #     )
-  # })
+
+  selected_columns <- eventReactive(input$Ok, {
+    columns <- input$columns
+    if (is.null(columns)) {
+      names(aa_mw)
+    } else {
+      columns
+    }
+  })
+  output$amino_acid_table <- renderDataTable({
+    datatable(aa_mw[, selected_columns()], rownames = FALSE, options = list(paging = FALSE)) %>%
+      formatStyle(
+        'Specification_AA',
+        backgroundColor = styleEqual(
+          unique(aa_mw$Specification_AA),
+          c('Non-polaire' = 'lightyellow', 'Polaire' = 'skyblue', 'Charge Negative' = 'orchid', 'Charge Positive' = 'palegreen')
+        ),
+        fontWeight = 'bold'
+      )
+  })
   filtered_results <- eventReactive(input$calculate, {
     req(input$od_1)
     oligopeptides <- get_oligopeptides(
