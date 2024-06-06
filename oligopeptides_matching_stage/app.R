@@ -14,11 +14,7 @@ source("https://raw.githubusercontent.com/p2m2/oligopeptides_matching/develop/ol
 
 ui <- dashboardPage(
   skin = "red",
-  dashboardHeader(
-    title = div(
-      tags$img(src = "logo_BIA.png", style = "margin-left: 10px; margin-right: 10px;"),
-    )),
-    #title = "Oligopeptides Matching", titleWidth = 250),
+  dashboardHeader(title = "Oligopeptides Matching", titleWidth = 250),
   dashboardSidebar(
     width = 250,
     tags$style(HTML(".share-buttons { text-align: center; margin-top: 20px; }" )),
