@@ -1,5 +1,6 @@
 <p style="text-align: center;">
-  <img src="shiny_logo.png" alt ="Shiny logo" width="200">
+  <img src="logo_BIA.png" alt="BIA logo" width="250" style="display: inline-block; margin-right: 10px;">
+  <img src="shiny_logo.png" alt="Shiny logo" width="150" style="display: inline-block;">
 </p>
 
 
