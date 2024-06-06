@@ -14,7 +14,11 @@ source("https://raw.githubusercontent.com/p2m2/oligopeptides_matching/develop/ol
 
 ui <- dashboardPage(
   skin = "red",
-  dashboardHeader(title = "Oligopeptides Matching", titleWidth = 250),
+  dashboardHeader(
+    title = div(
+      tags$img(src = "logo_BIA.png", style = "margin-left: 10px; margin-right: 10px;"),
+    )),
+    #title = "Oligopeptides Matching", titleWidth = 250),
   dashboardSidebar(
     width = 250,
     tags$style(HTML(".share-buttons { text-align: center; margin-top: 20px; }" )),
@@ -187,14 +191,13 @@ ui <- dashboardPage(
       ),
       tabItem(tabName = "feedback",
               fluidPage(
+                includeMarkdown("C:\\Données\\Sirine OUEIDA 2024\\GIT\\oligopeptides_matching\\oligopeptides_matching_stage\\docs\\feedback_user.md"),
                 h2("Feedback:"),
-                textAreaInput("description", "Description:", "", rows = 6),
-                checkboxGroupInput("suggestions", "Suggestions:",
-                                   choices = list("Suggestion 1:" =  "suggestion 1",
-                                                  "Suggestion 2:" =  "suggestion 2",
-                                                  "Suggestion 3:" =  "suggestion 3"
-                                                  )),
-                #includeMarkdown("C:\\Données\\Sirine OUEIDA 2024\\GIT\\oligopeptides_matching\\oligopeptides_matching_stage\\docs\\feedback_user.md"), 
+                selectInput("category", "Category:",
+                            choices = c("Bug", "General Feedback", "Idea")
+                            ),
+                textAreaInput("description", "Description:", "", rows = 6, width = "80%"),
+                textAreaInput("suggestions", "Suggestions:", "", rows = 10, width = "80%"),
                 actionButton("submit_feedback", "Submit", style = "color: white; background-color: #007bff; border-color: #007bff;")
                 )
               )
@@ -218,6 +221,8 @@ server <- function(input, output) {
     filter_od <- filtered_results()
     DT::datatable(filter_od)
   })
+  
+  
   #Pour Onlglet Amino acid and mass
   # selected_columns <- eventReactive(input$Ok, {
   #   columns <- input$columns
@@ -247,7 +252,7 @@ server <- function(input, output) {
   #   DT::datatable(filter_od)
   # })
   
-  #Pour Onlglet Combination AA Polyphenol
+  # Pour Onglet Combination AA Polyphenol
   combination_compounds <- reactive({
     req(input$od)
     aaa_combined <- get_oligopeptides(
@@ -262,14 +267,15 @@ server <- function(input, output) {
       oligopeptides = aaa_combined,
       polyphenols = polyphenols,
       chemical_derivation = chemical_derivation,
-      addition_reaction = 10))
+      addition_reaction = 10
+    ))
   })
   
   output$view_arrangement <- renderDT({
     combination_compounds()
   })
   
-  #Pour Onlglet match single mz
+  # Pour Onglet match single mz
   filtered_mz_obs <- reactive({
     req(input$mz_obs, input$ppm_error)
     data <- match_mz_obs(
@@ -290,8 +296,8 @@ server <- function(input, output) {
   
   observeEvent(input$Ok, {
     Sys.sleep(2)
-  output$view_filter_mz_obs <- renderDT({
-    filtered_mz_obs()
+    output$view_filter_mz_obs <- renderDT({
+      filtered_mz_obs()
     })
   })
   
@@ -315,8 +321,7 @@ server <- function(input, output) {
   # output$view_match <- renderDT({
   #   filtered_mz_obs()
   # })
-  
-  #Pour Onglet Match list mz
+  # Pour Onglet Match list mz
   data <- reactive({
     req(input$file1)
     df <- read.csv(input$file1$datapath, header = input$header, sep = input$sep)
@@ -333,12 +338,6 @@ server <- function(input, output) {
       selection$mz_obs <- NA
       selection$mass <- NA
       selection$ppm_error_value <- NA
-      # if (input$filtered_mz_obs == "" || is.na(input$filtered_mz_obs)) {
-      #   return(data.frame())
-      # } else {
-      #   matching <- subset(selection, mz == input$filtered_mz_obs)
-      #   return(matching)
-      # }
       datatable(selection)
     })
     
@@ -352,6 +351,7 @@ server <- function(input, output) {
         ppm_error = input$ppm_error
       )
     })
+    
     output$view_match <- DT::renderDataTable({
       match_results <- match_list_mz()
       if (is.null(match_results)) {
@@ -360,6 +360,7 @@ server <- function(input, output) {
         return(match_results)
       }
     })
+    
     output$downloadDataList <- downloadHandler(
       filename = function() {
         paste("matched_mz_list", ".csv", sep = "")
@@ -367,34 +368,39 @@ server <- function(input, output) {
       content = function(file) {
         match_results <- match_list_mz()
         if (!is.null(match_results)) {
-        req(data())
-        df <- data()
-        selection <- df[, c(input$name_column, input$mz_column, input$RT_column)]
-        colnames(selection) <- c("name", "mz", "RT")
-        selection$name_combination <- NA
-        selection$mz_obs <- NA
-        selection$mass <- NA
-        selection$ppm_error_value <- NA
-
-        write.csv(selection, file, row.names = FALSE)
+          req(data())
+          df <- data()
+          selection <- df[, c(input$name_column, input$mz_column, input$RT_column)]
+          colnames(selection) <- c("name", "mz", "RT")
+          selection$name_combination <- NA
+          selection$mz_obs <- NA
+          selection$mass <- NA
+          selection$ppm_error_value <- NA
+          write.csv(selection, file, row.names = FALSE)
+        }
       }
-    }
-    )}
-    
-
-  observeEvent(input$submit_feedback, {
+    )
+  })
+  
+      # if (input$filtered_mz_obs == "" || is.na(input$filtered_mz_obs)) {
+      #   return(data.frame())
+      # } else {
+      #   matching <- subset(selection, mz == input$filtered_mz_obs)
+      #   return(matching)
+      # }
+      
+  # Ajout de l'observeEvent pour submit_feedback
+  observeEvent(input$submit_feedback, { 
     description <- input$description
     suggestions <- input$suggestions
     
-    print(paste("Description:", description))
-    print(paste("Suggestions:", suggestions))
     
     showModal(modalDialog(
-      title = "Thank you, your feedback has been submitted !",
+      title = "Thank you, your feedback has been submitted!",
       easyClose = TRUE,
       footer = NULL
     ))
   })
-)}
+}
 
 shinyApp(ui, server)
