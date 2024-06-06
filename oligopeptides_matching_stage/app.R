@@ -180,9 +180,21 @@ ui <- dashboardPage(
                 )
               )
       ),
+      tabItem(tabName = "about",
+              fluidPage(
+                includeMarkdown("C:\\Données\\Sirine OUEIDA 2024\\GIT\\oligopeptides_matching\\oligopeptides_matching_stage\\docs\\about.md")
+              )
+      ),
       tabItem(tabName = "feedback",
               fluidPage(
-                includeMarkdown("C:\\Données\\Sirine OUEIDA 2024\\GIT\\oligopeptides_matching\\oligopeptides_matching_stage\\docs\\feedback_user.md"), 
+                h2("Feedback:"),
+                textAreaInput("description", "Description:", "", rows = 6),
+                checkboxGroupInput("suggestions", "Suggestions:",
+                                   choices = list("Suggestion 1:" =  "suggestion 1",
+                                                  "Suggestion 2:" =  "suggestion 2",
+                                                  "Suggestion 3:" =  "suggestion 3"
+                                                  )),
+                #includeMarkdown("C:\\Données\\Sirine OUEIDA 2024\\GIT\\oligopeptides_matching\\oligopeptides_matching_stage\\docs\\feedback_user.md"), 
                 actionButton("submit_feedback", "Submit", style = "color: white; background-color: #007bff; border-color: #007bff;")
                 )
               )
@@ -367,7 +379,22 @@ server <- function(input, output) {
         write.csv(selection, file, row.names = FALSE)
       }
     }
-  )}
+    )}
+    
+
+  observeEvent(input$submit_feedback, {
+    description <- input$description
+    suggestions <- input$suggestions
+    
+    print(paste("Description:", description))
+    print(paste("Suggestions:", suggestions))
+    
+    showModal(modalDialog(
+      title = "Thank you, your feedback has been submitted !",
+      easyClose = TRUE,
+      footer = NULL
+    ))
+  })
 )}
 
 shinyApp(ui, server)
