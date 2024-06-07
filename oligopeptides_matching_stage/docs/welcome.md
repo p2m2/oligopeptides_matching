@@ -1,13 +1,6 @@
-<p style="text-align: center;">
-  <img src="logo_BIA.png" alt="BIA logo" width="250" style="display: inline-block; margin-right: 10px;">
-  <img src="shiny_logo.png" alt="Shiny logo" width="150" style="display: inline-block;">
-</p>
 
+# Oligopeptides Matching
 
-[![p2m2](https://circleci.com/gh/p2m2/oligopeptides_matching.svg?style=shield)](https://app.circleci.com/pipelines/github/p2m2)
-[![](https://img.shields.io/badge/stable-shinyapps.io-blue?style=flat&labelColor=white&logo=RStudio&logoColor=blue)](https://p2m2.shinyapps.io/oligopeptides_matching/) 
-
-# Introduction 
 Legume cops constitute a promising alternative to reduce meat proteins in human diet. One of the locks to their use is the presence of polyphenols. Condensed tannins (polyphenol polymers) are contained in testa and during the processing steps (i.e alkalinization) some can be processed with the kernel. High pH triggered polyphenols autoxidation that led to quinone formation and thus to nucleophilic attacks (Michael addition or imine formation1) on proteins.
 
 Despite considerable advances in metabolomics annotation, the metabolite identification remains challenging2. If numerous of natural compounds are now well known, the annotation of adducts and derivatives needs to the in-depth comprehension of natural compound reactivity and transformations3. 
