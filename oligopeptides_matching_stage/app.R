@@ -20,7 +20,7 @@ ui <- dashboardPage(
     tags$style(HTML(".share-buttons { text-align: center; margin-top: 20px; }" )),
     sidebarMenu(
       menuItem("Home", tabName = "home", icon = icon("home")),
-      #menuItem("Amino Acid and Mass", tabName = "AminoAcidandMass"),
+      menuItem("Amino Acid and Mass", tabName = "AminoAcidandMass"),
       menuItem("Amino-acid assemblies", tabName = "assemblies", icon = icon("calculator")),
       menuItem("Combination AA Polyphenol", tabName = "CombinationAApolyphenol"),
       menuItem("Match a single mz", tabName = "Matchasinglemz"),
@@ -55,6 +55,26 @@ ui <- dashboardPage(
               h2("Welcome to the Home Page !"),
               tagList(
                 includeMarkdown("C:\\Données\\Sirine OUEIDA 2024\\GIT\\oligopeptides_matching\\oligopeptides_matching_stage\\docs\\welcome.md")
+              )
+      ),
+      tabItem(tabName = "AminoAcidandMass",
+              fluidPage(
+                tags$head(
+                  tags$style(HTML("
+                    table, th, td {
+                      border: 1px solid black;
+                      border-collapse: collapse;
+                    }
+                    th, td {
+                      padding: 5px;
+                      text-align: left;
+                    }
+                  "))
+                ),
+                mainPanel(
+                  h3("Amino Acid and Mass"),
+                  includeMarkdown("amino_acid.md")
+                )
               )
       ),
       # tabItem(tabName = "AminoAcidandMass",
