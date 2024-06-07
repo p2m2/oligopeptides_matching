@@ -31,15 +31,15 @@ ui <- dashboardPage(
         tabName = NULL,
         div(
           style ="display: flex; justify-content: space-between; padding: 10px;",
-          tags$img(src = "logo_BIA.png", height = "30px", alt = "Logo 1"),
-          tags$img(src = "C:/Données/Sirine OUEIDA 2024/GIT/oligopeptides_matching/oligopeptides_matching_stage/docs/Igepp_logo.png", height = "30px", alt = "Logo 2")
+          tags$img(src = "bia_logo.png", height = "45px", alt = "Logo 1"),
+          tags$img(src = "igepp.jpg", height = "45px", alt = "Logo 2")
         )
       ),
       menuItem(
         tabName = NULL,
         div(
-          style ="text-align: center; padding-top: 10px;",
-          tags$img(src = "C:\\Données\\Sirine OUEIDA 2024\\GIT\\oligopeptides_matching\\oligopeptides_matching_stage\\docs\\logoP2M2.png", height = "30px", alt = "Logo 3") 
+          style ="text-align: center; padding-top: 5px;",
+          tags$img(src = "logoP2M2.png", height = "50px", alt = "Logo 3") 
         )
       )
     )
