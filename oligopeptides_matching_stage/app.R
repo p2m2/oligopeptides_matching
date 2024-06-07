@@ -21,38 +21,32 @@ ui <- dashboardPage(
     sidebarMenu(
       menuItem("Home", tabName = "home", icon = icon("home")),
       menuItem("Amino Acid and Mass", tabName = "AminoAcidandMass"),
-      menuItem("Amino-acid assemblies", tabName = "assemblies", icon = icon("calculator")),
+      menuItem("Amino-acid assemblies", tabName = "assemblies"),
       menuItem("Combination AA Polyphenol", tabName = "CombinationAApolyphenol"),
       menuItem("Match a single mz", tabName = "Matchasinglemz"),
       menuItem("Match a list of mz", tabName = "Matchalistofmz"),
       menuItem("About", tabName = "about", icon = icon("question")),
-      menuItem("Feedback", tabName = "feedback", icon = icon("envelope"))
-    ),
-  #   tags$div(
-  #     class = "share-buttons",
-  #     tags$a(href = "https://www.facebook.com/sharer/sharer.php?u=https://si-o-02-bioinfo.shinyapps.io/oligopeptides_matching/", target = "_blank", icon("facebook")),
-  #     tags$a(href = "https://twitter.com/intent/tweet?url=https://si-o-02-bioinfo.shinyapps.io/oligopeptides_matching/", target = "_blank", icon("twitter")),
-  #     tags$a(href = "https://www.linkedin.com/shareArticle?url=https://si-o-02-bioinfo.shinyapps.io/oligopeptides_matching/", target = "_blank", icon("linkedin")),
-  #   )
-  # ),
-      HTML(paste0(
-        "<br><br><br><br><br><br><br><br><br>",
-        "<table style='margin-left:auto; margin-right:auto; '>",
-        "<tr>",
-        "<td style='padding: 5px;'><a href='https://www.facebook.com/sharer/sharer.php?u=https://si-o-02-bioinfo.shinyapps.io/oligopeptides_matching/' target='_blank'><i class='fab fa-facebook-square fa-lg'></i></a></td>",
-        "<td style='padding: 5px;'><a href='https://twitter.com/tweet?url=https://si-o-02-bioinfo.shinyapps.io/oligopeptides_matching/' target='_blank'><i class='fab fa-twitter fa-lg'></i></a></td>",
-        "<td style='padding: 5px;'><a href='https://www.instagram.com/' target='_blank'><i class='fab fa-instagram fa-lg'></i></a></td>",
-        "<td style='padding: 5px;'><a href='http://www.linkedin.com/shareArticle?url=https://si-o-02-bioinfo.shinyapps.io/oligopeptides_matching/' target='_blank'><i class='fab fa-linkedin fa-lg'></i></a></td>",
-        "<td style='padding: 5px;'><a href='https://plus.google.com/' target='_blank'><i class='fab fa-google-plus fa-lg'></i></a></td>",
-        "</tr>",
-        "</table>",
-        "<br>")
+      menuItem("Feedback", tabName = "feedback", icon = icon("envelope")),
+      menuItem(
+        tabName = NULL,
+        div(
+          style ="display: flex; justify-content: space-between; padding: 10px;",
+          tags$img(src = "logo_BIA.png", height = "30px", alt = "Logo 1"),
+          tags$img(src = "C:/Données/Sirine OUEIDA 2024/GIT/oligopeptides_matching/oligopeptides_matching_stage/docs/Igepp_logo.png", height = "30px", alt = "Logo 2")
+        )
+      ),
+      menuItem(
+        tabName = NULL,
+        div(
+          style ="text-align: center; padding-top: 10px;",
+          tags$img(src = "C:\\Données\\Sirine OUEIDA 2024\\GIT\\oligopeptides_matching\\oligopeptides_matching_stage\\docs\\logoP2M2.png", height = "30px", alt = "Logo 3") 
+        )
       )
+    )
   ),
   dashboardBody(
     tabItems(
       tabItem(tabName = "home",
-              h2("Welcome to the Home Page !"),
               tagList(
                 includeMarkdown("C:\\Données\\Sirine OUEIDA 2024\\GIT\\oligopeptides_matching\\oligopeptides_matching_stage\\docs\\welcome.md")
               )
@@ -73,35 +67,16 @@ ui <- dashboardPage(
                 ),
                 mainPanel(
                   h3("Amino Acid and Mass"),
-                  includeMarkdown("amino_acid.md")
+                  includeMarkdown("C:\\Données\\Sirine OUEIDA 2024\\GIT\\oligopeptides_matching\\oligopeptides_matching_stage\\docs\\amino_acid.md")
                 )
               )
       ),
-      # tabItem(tabName = "AminoAcidandMass",
-      #         fluidRow(
-      #           sidebarLayout(
-      #             sidebarPanel(
-      #               style = "width: 200px;",
-      #               checkboxGroupInput("columns",
-      #                                  label = "Select columns to display:",
-      #                                  choices = c("Full_Name", "Symbol", "Amino_Acid", "Mass", "Specification_AA")
-      #               ),
-      #               actionButton("Ok", label = "Ok", style = "color: white; background-color: #007bff; border-color: #007bff;")
-      #             ),
-      #             mainPanel(
-      #               style = "right: 40px;",
-      #               dataTableOutput("amino_acid_table")
-      #             ),
-      #             position = "right"
-      #           )
-      #         )
-      # ),
-        tabItem(tabName = "assemblies",
+      tabItem(tabName = "assemblies",
               fluidPage(
-                  sidebarLayout(
-                    sidebarPanel(
-                      numericInput("od_1", "Oligomerization degree:", value = 1, min = 1),
-                      actionButton("calculate", "Calculate", style = "color: white; background-color: #007bff; border-color: #007bff;")
+                sidebarLayout(
+                  sidebarPanel(
+                    numericInput("od_1", "Oligomerization degree:", value = 1, min = 1),
+                    actionButton("calculate", "Calculate", style = "color: white; background-color: #007bff; border-color: #007bff;")
                   ),
                   mainPanel(
                     h3("Amino-acid assemblies"),
@@ -111,8 +86,8 @@ ui <- dashboardPage(
                     )
                   ),
                   position = "right"
-                  )
                 )
+              )
       ),
       tabItem(tabName = "CombinationAApolyphenol",
               fluidPage(
@@ -175,10 +150,6 @@ ui <- dashboardPage(
                                              Semicolon = ";",
                                              Tab = "\t"),
                                  selected = ","),
-                    # radioButtons("disp", "Display",
-                    #              choices = c(Head = "head",
-                    #                          All = "all"),
-                    #              selected = "head"),
                     numericInput("name_column", "Enter the column number of feature name:", value = 1),
                     numericInput("mz_column", "Enter the column number of m/z:", value = 2),
                     numericInput("RT_column", "Enter the column number of RT:", value = 3),
@@ -211,15 +182,17 @@ ui <- dashboardPage(
                 h2("Feedback:"),
                 selectInput("category", "Category:",
                             choices = c("Bug", "General Feedback", "Idea")
-                            ),
+                ),
                 textAreaInput("description", "Description:", "", rows = 6, width = "80%"),
                 textAreaInput("suggestions", "Suggestions:", "", rows = 10, width = "80%"),
                 actionButton("submit_feedback", "Submit", style = "color: white; background-color: #007bff; border-color: #007bff;")
-                )
               )
+      )
     )
   )
 )
+
+
 
 server <- function(input, output) {
 
