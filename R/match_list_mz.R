@@ -28,3 +28,9 @@ match_list_mz_obs <- function(list_mz_obs,  # contient les mz, name, rt
   results <- dplyr::select(results, name, rt, mz, mz_obs, mass, ppm_error_value)
   return(results)
 }  
+example_list_mz_obs <- data.frame(
+      name = c("M954t1417", "M100T50", "M121T93"),
+      mz = c(953.6798, 100.07, 120.9659),
+      rt = c(10.5, 20.6, 30.7)
+   )
+match_list_mz_obs(example_list_mz_obs$mz, 'already_charged', combined_compounds, ppm_error = 10)
