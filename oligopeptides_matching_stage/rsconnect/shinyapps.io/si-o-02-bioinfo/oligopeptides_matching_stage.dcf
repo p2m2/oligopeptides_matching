@@ -1,0 +1,10 @@
+name: oligopeptides_matching_stage
+title:
+username: si-o-02-bioinfo
+account: si-o-02-bioinfo
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 12056096
+bundleId: 8650790
+url: https://si-o-02-bioinfo.shinyapps.io/oligopeptides_matching_stage/
+version: 1

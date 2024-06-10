@@ -1,0 +1,10 @@
+name: Oligopeptides_matching_2
+title: Oligopeptides Matching
+username: si-o-02-bioinfo
+account: si-o-02-bioinfo
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 12064315
+bundleId: 8656308
+url: https://si-o-02-bioinfo.shinyapps.io/Oligopeptides_matching_2/
+version: 1
