@@ -10,6 +10,6 @@ Here we propose a computational solution to identify **polyphenol-peptides adduc
 In order to compute from amino acids molecular weight the putative oligomers of various oligomerization degree
 
 
-You will find the diffeent codes and ReadME to follow order to better understand :[Oligopeptides_matching](https://github.com/p2m2/oligopeptides_matching.git)
+You will find the different codes and ReadME to follow order to better understand : [**Oligopeptides_matching**](https://github.com/p2m2/oligopeptides_matching.git)
 
 
