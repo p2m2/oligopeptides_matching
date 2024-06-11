@@ -53,18 +53,6 @@ ui <- dashboardPage(
       ),
       tabItem(tabName = "AminoAcidandMass",
               fluidPage(
-                tags$head(
-                  tags$style(HTML("
-                    table, th, td {
-                      border: 1px solid black;
-                      border-collapse: collapse;
-                    }
-                    th, td {
-                      padding: 5px;
-                      text-align: left;
-                    }
-                  "))
-                ),
                 mainPanel(
                   h3("Amino Acid and Mass"),
                   includeMarkdown("C:\\Données\\Sirine OUEIDA 2024\\GIT\\oligopeptides_matching\\oligopeptides_matching_stage\\docs\\amino_acid.md")
