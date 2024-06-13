@@ -299,73 +299,54 @@ server <- function(input, output) {
   #   filtered_mz_obs()
   # })
   # Pour Onglet Match list mz
-  data <- reactive({
-    req(input$file1)
-    df <- read.csv(input$file1$datapath, header = input$header, sep = input$sep)
-    df
-  })
-  
-  observeEvent(input$update, {
-    output$view_match <- DT::renderDataTable({
+  server <- function(input, output) {
+    
+    data <- reactive({
+      req(input$file1)
+      df <- read.csv(input$file1$datapath, header = input$header, sep = input$sep)
+      df
+    })
+    
+    observeEvent(input$update, {
       req(data())
       df <- data()
       selection <- df[, c(input$name_column, input$mz_column, input$RT_column)]
       colnames(selection) <- c("name", "mz", "RT")
-      selection$name_combination <- NA
-      selection$mz_obs <- NA
-      selection$mass <- NA
-      selection$ppm_error_value <- NA
-      datatable(selection)
-    })
-    
-    match_list_mz <- reactive({
-      req(input$file1, input$name_column, input$mz_column, input$RT_column, input$ppm_error)
-      df <- read.csv(input$file1$datapath, header = input$header, sep = input$sep)
-      match_list_mz(
-        mz_obs = df[, input$mz_column],
-        ionization = "already_charged", # Vous pouvez modifier l'ionisation ici si nécessaire
-        match_list = combined_compounds, # Vous devez avoir combined_compounds disponible ici
+      
+      matched_results <- match_list_mz_obs(
+        list_mz_obs = selection,
+        ionization = "already_charged",  
+        combined_compounds = combined_compounds,  
         ppm_error = input$ppm_error
       )
-    })
-    
-    output$view_match <- DT::renderDataTable({
-      match_results <- match_list_mz()
-      if (is.null(match_results)) {
-        return(NULL)
-      } else {
-        return(match_results)
-      }
+      
+      output$view_match <- DT::renderDataTable({
+        DT::datatable(matched_results)
+      })
     })
     
     output$downloadDataList <- downloadHandler(
       filename = function() {
-        paste("matched_mz_list", ".csv", sep = "")
+        "matched_mz_list.csv"
       },
       content = function(file) {
-        match_results <- match_list_mz()
-        if (!is.null(match_results)) {
-          req(data())
-          df <- data()
-          selection <- df[, c(input$name_column, input$mz_column, input$RT_column)]
-          colnames(selection) <- c("name", "mz", "RT")
-          selection$name_combination <- NA
-          selection$mz_obs <- NA
-          selection$mass <- NA
-          selection$ppm_error_value <- NA
-          write.csv(selection, file, row.names = FALSE)
-        }
+        req(data())
+        df <- data()
+        selection <- df[, c(input$name_column, input$mz_column, input$RT_column)]
+        colnames(selection) <- c("name", "mz", "RT")
+        
+        matched_results <- match_list_mz_obs(
+          list_mz_obs = selection,
+          ionization = "already_charged", 
+          combined_compounds = combined_compounds,  
+          ppm_error = input$ppm_error
+        )
+        write.csv(matched_results, file, row.names = FALSE)
       }
     )
-  })
+  }
   
-      # if (input$filtered_mz_obs == "" || is.na(input$filtered_mz_obs)) {
-      #   return(data.frame())
-      # } else {
-      #   matching <- subset(selection, mz == input$filtered_mz_obs)
-      #   return(matching)
-      # }
-      
+   
   # Ajout de l'observeEvent pour submit_feedback
   observeEvent(input$submit_feedback, { 
     description <- input$description
