@@ -299,8 +299,6 @@ server <- function(input, output) {
   #   filtered_mz_obs()
   # })
   # Pour Onglet Match list mz
-  server <- function(input, output) {
-    
     data <- reactive({
       req(input$file1)
       df <- read.csv(input$file1$datapath, header = input$header, sep = input$sep)
@@ -319,6 +317,9 @@ server <- function(input, output) {
         combined_compounds = combined_compounds,  
         ppm_error = input$ppm_error
       )
+      if (is.null(matched_results) || nrow(matched_results) == 0) {
+        matched_results <- data.frame(message = "No matches found")
+      }
       
       output$view_match <- DT::renderDataTable({
         DT::datatable(matched_results)
@@ -344,7 +345,6 @@ server <- function(input, output) {
         write.csv(matched_results, file, row.names = FALSE)
       }
     )
-  }
   
    
   # Ajout de l'observeEvent pour submit_feedback
