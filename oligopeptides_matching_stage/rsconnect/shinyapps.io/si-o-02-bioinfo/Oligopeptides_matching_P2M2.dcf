@@ -1,0 +1,10 @@
+name: Oligopeptides_matching_P2M2
+title: Oligopeptides Matching
+username: si-o-02-bioinfo
+account: si-o-02-bioinfo
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 12192555
+bundleId: 8752218
+url: https://si-o-02-bioinfo.shinyapps.io/Oligopeptides_matching_P2M2/
+version: 1
