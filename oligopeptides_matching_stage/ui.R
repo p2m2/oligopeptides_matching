@@ -65,7 +65,7 @@ ui <- dashboardPage(
                   ),
                   mainPanel(
                     h3("Amino-acid assemblies"),
-                    h5("This menu represents the calculation process from one to amino-acid assemblies"),
+                    h5("This menu represents the calculation process from one to amino-acid assemblies. You can input the oligomerization degree and click 'Calculate' to see the results"),
                     conditionalPanel(
                       condition = "input.calculate > 0",
                       withSpinner(DT::dataTableOutput("results"))
@@ -85,6 +85,7 @@ ui <- dashboardPage(
                   ),
                   mainPanel(
                     h3("Combination AA Polyphenol"),
+                    h5("This menu allows you to calculate the combinao of amino acids and polyphenols. Input the oligomerization degree and see the results"),
                     withSpinner(DT::dataTableOutput("view_arrangement"))
                   ),
                   position = "right"
@@ -110,7 +111,7 @@ ui <- dashboardPage(
                   mainPanel(
                     downloadButton("downloadDataSingle", "Download", style = "position: fixed; bottom: 20px; left: 85%"),
                     h3("Match a single mz"),
-                    h5("This menu represents the matching process of a single m/z; You can choose your own m/z value to find the match"),
+                    h5("This menu represents the matching process of a single m/z; You can input your own m/z value, ionization, and tolerance to find the match"),
                     conditionalPanel(
                       condition = "input.Ok > 0",
                       withSpinner(DT::dataTableOutput("view_filter_mz_obs"))
@@ -149,7 +150,7 @@ ui <- dashboardPage(
                   mainPanel(
                     downloadButton("downloadDataList", "Download", style = "position: fixed; bottom: 20px; left: 85%"),
                     h3("Match a list of mz"),
-                    h5("This menu represents the matching process of a list of m/z. Please Select the file, then the coloums of Rt, mz and feature name"),
+                    h5("This menu represents the matching process of a list of m/z. PYou can upload a CSV file containing the m/z values, select the columns of RT, mz, and feature name, and input the tolerance to find the matches"),
                     conditionalPanel(
                       condition = "input.update > 0",
                       withSpinner(DT::dataTableOutput("view_match"))

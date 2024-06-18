@@ -1,5 +1,5 @@
 **If you would like to report an issue or give us an idea, please use the form below.** 
- Please choose one **category** from the available choices, and enter a **description and a suggestion** 
+you can choose a **category** from the available choices, describe the **issue or suggestion**.
 
 Once complete, please press the **Submit button.**
 
