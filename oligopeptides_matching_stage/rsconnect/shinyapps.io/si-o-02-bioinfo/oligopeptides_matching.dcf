@@ -5,6 +5,6 @@ account: si-o-02-bioinfo
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 12056117
-bundleId: 8650803
+bundleId: 8756978
 url: https://si-o-02-bioinfo.shinyapps.io/oligopeptides_matching/
 version: 1
