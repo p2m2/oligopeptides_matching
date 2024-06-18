@@ -51,6 +51,7 @@ ui <- dashboardPage(
               fluidPage(
                 mainPanel(
                   h3("Amino Acid and Mass"),
+                  h5("This menu represents a table of the amino acids and their mass"),
                   includeMarkdown("amino_acid.md")
                 )
               )
@@ -64,6 +65,7 @@ ui <- dashboardPage(
                   ),
                   mainPanel(
                     h3("Amino-acid assemblies"),
+                    h5("This menu represents the calculation process from one to amino-acid assemblies"),
                     conditionalPanel(
                       condition = "input.calculate > 0",
                       withSpinner(DT::dataTableOutput("results"))
