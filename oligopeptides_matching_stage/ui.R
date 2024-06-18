@@ -110,6 +110,7 @@ ui <- dashboardPage(
                   mainPanel(
                     downloadButton("downloadDataSingle", "Download", style = "position: fixed; bottom: 20px; left: 85%"),
                     h3("Match a single mz"),
+                    h5("This menu represents the matching process of a single m/z; You can choose your own m/z value to find the match"),
                     conditionalPanel(
                       condition = "input.Ok > 0",
                       withSpinner(DT::dataTableOutput("view_filter_mz_obs"))
@@ -148,6 +149,7 @@ ui <- dashboardPage(
                   mainPanel(
                     downloadButton("downloadDataList", "Download", style = "position: fixed; bottom: 20px; left: 85%"),
                     h3("Match a list of mz"),
+                    h5("This menu represents the matching process of a list of m/z. Please Select the file, then the coloums of Rt, mz and feature name"),
                     conditionalPanel(
                       condition = "input.update > 0",
                       withSpinner(DT::dataTableOutput("view_match"))
