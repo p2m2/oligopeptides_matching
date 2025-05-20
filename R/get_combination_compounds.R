@@ -11,32 +11,25 @@
 get_combination_compounds <- function(oligopeptides,
                                       polyphenols,
                                       chemical_derivation,
-                                      addition_reaction) {  
+                                      addition_reaction) {
   m <- length(polyphenols)
   n <- nrow(oligopeptides)
   o <- length(chemical_derivation) 
-
-  if ( length(names(polyphenols))!= m ) {
-    stop(paste("polyphenols names missing :",names(polyphenols)))
-  }
-
-  if ( length(names(chemical_derivation)) != o ) {
-    stop(paste("chemical_derivation names missing :",names(chemical_derivation)))
-  }
-
-  size <- (m * n * o) + (m * n)
+  
+  size <- ((m * n * o) + (m * n))
+  
   combined_compounds_names <- vector("character", size)
-  combined_compounds_mass <- vector("numeric",size)
+  combined_compounds_mass <- vector("numeric", size)
   
   l <- 1
   
-  for (i in 1:n) {
-    for (j in 1:m) {
+  for (i in seq_len(nrow(oligopeptides))) {
+    for (j in seq_along(polyphenols)) {
       combined_compounds_names[l] <- paste(oligopeptides[i,2], names(polyphenols)[j], sep = "_") 
       combined_compounds_mass[l] <- oligopeptides[i,3] + polyphenols[j] - addition_reaction
       l <- l + 1
       for (k in 1:o) {
-        buf <- paste(oligopeptides[i,2], names(polyphenols)[j], sep = "_")      
+        buf <- paste(oligopeptides[i,2], names(polyphenols)[j], sep = "_")
         combined_compounds_names[l] <- paste(buf, names(chemical_derivation)[k], sep = "_") 
         combined_compounds_mass[l] <- oligopeptides[i,3] + polyphenols[j] - addition_reaction + chemical_derivation[k]
         l <- l + 1
@@ -48,7 +41,8 @@ get_combination_compounds <- function(oligopeptides,
   combined_compounds <- combined_compounds[unique(names(combined_compounds))]
   
   df <- as.data.frame(combined_compounds)
-  colnames(df) <- c("mass")
-  df <- dplyr::arrange(df, mass)
+  colnames(df) <- c("mass_theo")
+  df <- dplyr::arrange(df, mass_theo)
   return(df)
   }
+

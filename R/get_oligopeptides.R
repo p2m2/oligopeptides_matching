@@ -14,7 +14,12 @@
 #' @examples
 #' get_oligopeptides(aminoacids = stats::setNames(c(89.047679),c("A")),
 #' oligomerization_degree = 4)
-get_oligopeptides <- function(aminoacids,oligomerization_degree){
+get_oligopeptides <- function(aminoacids, oligomerization_degree){
+
+  if (!is.numeric(oligomerization_degree) || length(oligomerization_degree) != 1 ||
+      oligomerization_degree <= 1 || oligomerization_degree != as.integer(oligomerization_degree)) {
+    stop("'oligomerization_degree' doit être un entier supérieur ou égal à 1.")
+  }
   H2O <- 18.010565
   tmp_oligopeptides <- aminoacids
   all_peptides <-  build_peptides(aminoacids, 1)
