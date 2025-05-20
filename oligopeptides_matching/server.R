@@ -18,8 +18,9 @@ server <- function(input, output) {
 
     return(get_combination_compounds(oligopeptides, 
                                      polyphenols, 
-                                     addition_reaction,
-                                     chemical_derivation))
+                                     chemical_derivation,
+                                     addition_reaction
+                                     ))
   })
   # =====
   # All arrangement AA with PolyPhenols
@@ -33,7 +34,7 @@ server <- function(input, output) {
      {
       return(match_mz_obs(
         input$mz_obs,
-        'already_charged',
+        input$ionization,
         combination_compounds(),
         ppm_error = input$ppm_error))
     }

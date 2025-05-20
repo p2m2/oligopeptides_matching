@@ -28,9 +28,14 @@ tabPanel("Match a single Mz",
     numericInput(inputId = "mz_obs",
                    label = "M/z observed :",
                    value = 953.669),
+    selectInput("ionization", "Ionization:",
+                c("Already charged" = "already_charged",
+                  "Positive" = "pos",
+                  "Negative" = "neg")),
     numericInput(inputId = "ppm_error",
                    label = "Tolerance:",
                    value = 10)
+
     ),
     # Main panel for displaying outputs ----
     mainPanel(
