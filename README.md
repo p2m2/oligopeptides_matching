@@ -28,7 +28,9 @@ Use the GitHub repository to install the latest version of the package:
 
 ```R
 
-devtools::install_github("p2m2/AdducTrackR")
+devtools::install_github("p2m2/AdducTrackR") # install package
+
+library(AdducTrackR) # load package
 
 ```
 
@@ -184,7 +186,11 @@ combined_compounds <- get_combination_compounds(
                           chemical_derivation, 
                           addition_reaction
                           )
+View(combined_compounds)
+
 ```
+
+This comprehensive combinatorial table (*combined_compounds*) provides the core reference for downstream mass matching and annotation of experimental data.
 
 ## Example 2: Dataset from Bayati & Poojari Study
 
@@ -198,6 +204,8 @@ This example illustrates how to cross-reference experimentally detected features
 Below, we load their dataset to use as a case study:
 
 ```R
+
+library(readxl) # load package to manage .xlsx files
 
 # load accurate mass
 study_case <- read_excel("Samples/Bayati_Poojari_db.xlsx")
