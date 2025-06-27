@@ -1,7 +1,7 @@
-Package: oligopeptidesMatching
+Package: AdducTrackR
 Title: Library of functions for in silico construction and detection of oligopeptides
 Description: In order to compute from amino acids molecular weight the putative oligomers of various oligomerization degree.
-Version: 0.0.3
+Version: 0.0.4
 Authors@R: c(
     person(given = "Kevin",
            family = "Billet",
@@ -17,7 +17,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
-URL: https://github.com/p2m2/oligopeptides_matching
-BugReports: https://github.com/p2m2/oligopeptides_matching/issues
+URL: https://github.com/p2m2/AdducTrackR
+BugReports: https://github.com/p2m2/AdducTrackR/issues
 Imports: 
     stringr,gdata,dplyr,purrr,stats,rlang
