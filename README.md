@@ -1,7 +1,7 @@
 # AdducTrackR
 
-[![p2m2](https://circleci.com/gh/p2m2/oligopeptides_matching.svg?style=shield)](https://app.circleci.com/pipelines/github/p2m2)
-[![](https://img.shields.io/badge/stable-shinyapps.io-blue?style=flat&labelColor=white&logo=RStudio&logoColor=blue)](https://p2m2.shinyapps.io/oligopeptides_matching/)
+[![p2m2](https://circleci.com/gh/p2m2/AdducTrackR.svg?style=shield)](https://app.circleci.com/pipelines/github/p2m2)
+[![](https://img.shields.io/badge/stable-shinyapps.io-blue?style=flat&labelColor=white&logo=RStudio&logoColor=blue)](https://p2m2.shinyapps.io/AdducTrackR/)
 
 In order to compute from amino acids molecular weight the putative oligomers of various oligomerization degree
 
@@ -28,7 +28,7 @@ Use the GitHub repository to install the latest version of the package:
 
 ```R
 
-devtools::install_github("p2m2/oligopeptides_matching")
+devtools::install_github("p2m2/AdducTrackR")
 
 ```
 
@@ -92,34 +92,7 @@ show(oligopeptides)
 
 ```
 
-##  Set Your Reference Polyphenols
-
-This step allows the user to define the list of polyphenols that will be used throughout the entire in silico workflow.
-These compounds are experimentally relevant molecules, typically suspected to interact with amino-containing structures derived from proteogenic amino acids (e.g. peptides or amino acids themselves).
-
-⚠️ This list must be provided by the user, and its accuracy is critical. All downstream calculations—mass matching, adduct formation, or derivatization—will rely on the exact names and molecular weights defined here.
-
-Make sure to only include compounds actually used in your experimental setup or of specific interest to your study.
-
-
-```R
-
-# Constants
-### polyphenol list
-name_polyphenol <- c("Cyanidin",
-                "Cyanidin 3,5-O-diglucoside",
-                "Cyanidin 3-O-(6''-acetyl-galactoside)",
-                "Cyanidin 3-O-(6''-acetyl-glucoside)",
-                "Cyanidin 3-O-(6''-caffeoyl-glucoside)")
-
-### polyphenol molecular weight
-mass_polyphenol <- c(287.244, 611.525,491.422, 491.422, 611.527)
-
-polyphenols <- setNames(mass_polyphenol, name_polyphenol)
-
-```
-
-## Polyphenol Derivatization and Atomic Mass Definition
+## Polyphenolic Derivatization: Atomic Mass Initialization and Simulation Setup
 
 To simulate realistic chemical modifications, the package allows you to define the exact atomic masses of relevant elements and to initialize common derivatization patterns. This includes specifying the names and exact masses of chemical groups frequently involved in polyphenol modifications—such as methylation, hydroxylation, or glycosylation.
 
@@ -161,7 +134,41 @@ chemical_derivation <- setNames(mass_chemical_derivation, name_chemical_derivati
 
 ```
 
-## Build Your In Silico Polyphenol-Peptide Library 
+## Example 1: Manual Input
+
+### Set Your Reference Polyphenols
+
+This step allows the user to manually define the list of polyphenols that will be used throughout the entire in silico workflow.
+These compounds are experimentally relevant molecules, typically suspected to interact with amino-containing structures derived from proteogenic amino acids (e.g. peptides or amino acids themselves).
+
+⚠️ This list must be provided by the user, and its accuracy is critical. All downstream calculations—mass matching, adduct formation, or derivatization—will rely entirely on the names and exact molecular weights specified at this step.
+
+In this example, polyphenol names and exact masses are directly entered into the R script. You can also import them from a file if preferred, but the responsibility for defining and curating this reference list lies with the user.
+
+📌 Make sure to include only the polyphenols that were actually present in your experimental design or that are of specific interest to your biological question.
+
+ℹ️ The few polyphenol examples provided below are illustrative and were selected from the PolyphenolExplorer database.
+*Neveu, V., Perez-Jiménez, J., Vos, F., Crespy, V., du Chaffaut, L., Mennen, L., ... & Scalbert, A. (2010). Phenol-Explorer: an online comprehensive database on polyphenol contents in foods. Database, 2010.* https://doi.org/10.1093/database/bap024
+
+
+```R
+
+# Constants
+### polyphenol list
+name_polyphenol <- c("Cyanidin",
+                "Cyanidin 3,5-O-diglucoside",
+                "Cyanidin 3-O-(6''-acetyl-galactoside)",
+                "Cyanidin 3-O-(6''-acetyl-glucoside)",
+                "Cyanidin 3-O-(6''-caffeoyl-glucoside)")
+
+### polyphenol molecular weight
+mass_polyphenol <- c(287.244, 611.525,491.422, 491.422, 611.527)
+
+polyphenols <- setNames(mass_polyphenol, name_polyphenol)
+
+```
+
+## Generate Theoretical Adduct Combinations 
 
 Easily create in silico adducts of polyphenols and peptides using customizable reaction rules. 
 
@@ -179,9 +186,12 @@ combined_compounds <- get_combination_compounds(
                           )
 ```
 
-## Example Dataset from Bayati & Poojari Study
+## Example 2: Dataset from Bayati & Poojari Study
 
-To demonstrate the package functionality, we use experimental data published by Bayati and Poojari. Their study provides accurate mass measurements relevant for exploring polyphenol-peptide interactions.
+To demonstrate the functionality of AdducTrackR, we use experimental data published by Bayati & Poojari, which includes high-resolution mass measurements of polyphenol–peptide interactions.
+
+This example illustrates how to cross-reference experimentally detected features with the in silico adduct predictions generated by AdducTrackR—highlighting the potential of the package to support annotation and validation of real-world datasets.
+
 
 *Bayati, M., & Poojary, M. M. (2025). Polyphenol autoxidation and prooxidative activity induce protein oxidation and protein-polyphenol adduct formation in model systems. Food Chemistry, 466, 142208.* https://doi.org/10.1016/j.foodchem.2024.142208
 
@@ -195,73 +205,104 @@ head(study_case)
 
 ```
 
+### Reference Polyphenols from the Bayati & Poojari's Work
 
+This section defines the list of polyphenols reported in the study by Bayati & Poojari. These compounds were experimentally identified as key actors in interactions with amino acid–based structures such as peptides or proteins.
 
+To support accurate in silico modeling, each polyphenol is manually defined by its name and exact neutral mass (in Daltons). These masses correspond to the intact compounds used in the experimental setup. Ionization and derivatization processes—necessary for mass spectrometry comparisons—are handled downstream by the AdducTrackR pipeline.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Example 3 : match a mz_obs with the caculated list 
+The polyphenol names are abbreviated as in the original publication, and their associated masses are curated accordingly. This dataset serves as a chemical reference space for generating and comparing predicted peptide–polyphenol adducts.
 
 ```R
 
-mz_obs <- 360.2626
-test <- match_mz_obs(mz_obs, 'already_charged', combined_compounds, ppm_error = 700)
+### polyphenol list
+name_polyphenol <- c("RA",
+                     "CA",
+                     "DHCA",
+                     "GA",
+                     "PCA",
+                     "EC",
+                     "CAT",
+                     "CGA",
+                     "4MC")
+
+### polyphenol molecular weight
+mass_polyphenol <- c(360.08451746,
+                     180.04225873,
+                     182.05790880, 
+                     170.02152329, 
+                     154.02660867,
+                     290.07903816,
+                     290.07903816,
+                     354.09508215,
+                     124.052429494)
+
+polyphenols <- setNames(mass_polyphenol, name_polyphenol)
 
 ```
 
-## R Shiny
+## Generate Theoretical Adduct Combinations 
 
-### Running example
+This step computes in silico adducts between the reference polyphenols from Bayati & Poojari’s study and all peptides previously generated.
+
+The chemical reaction mechanism can be specified by the user. In the example below, a Michael addition is simulated by defining the appropriate atomic mass shift. Other mechanisms—such as Schiff base formation—can also be implemented by adjusting the addition_reaction.
 
 ```R
-# if necessary...
-install.packages("shiny")
-install.packages("DT")
 
-library(shiny)
+# Define the mass shift for the desired adduct formation
+schiff_base <- 2 * H + 1 * O       # Example: Schiff base
+michael_add <- 2 * H               # Example: Michael addition
+addition_reaction <- michael_add   # Select the desired reaction type
 
-library(devtools)
-library(roxygen2)
-document()
-runApp("oligopeptides_matching")
+# Generate all polyphenol-peptide adduct combinations
+combined_compounds <- get_combination_compounds(
+  oligopeptides, 
+  polyphenols,
+  chemical_derivation, 
+  addition_reaction
+)
+
 ```
 
-### Examples
-- [search for amino acid combination](exampleOligopeptidesMatching_aa)
-- [search for amino acids/oligopeptides and polyphenols combination](exampleOligopeptidesMatching_aa_and_polyphenols)
+💡 This process creates a complete theoretical library of possible polyphenol–peptide adducts, which can later be matched against experimental mass spectrometry data.
 
-## Acknowledgments
-- Data about polyphenolic compounds are gracefuly provided by Phenol-Explorer:
-    - [Neveu et al. (2010) Database](https://doi.org/10.1093/database/bap024)
-    - [Rothwell et al. (2012) Database](https://doi.org/10.1093/database/bas031)
-    - [Rothwell et al. (2013) Database](https://doi.org/10.1093/database/bat070)
+### Theoretical vs Observed m/z Comparison
 
+This step compares experimentally observed m/z values from Bayati & Poojari’s dataset to the theoretical adduct masses generated by AdducTrackR.
+
+Each entry in the output table includes:
+
+- The original analyte name and its observed m/z,
+- The best matching theoretical adduct,
+- The ppm error between observed and theoretical m/z,
+- The ppm tolerance used for the match.
+
+```R
+
+study_case_extended <- pmap_dfr(
+  study_case,
+  function(Analyte, `Accurate Mass [M+H]+`, KB_FO_name) {
+    mz_obs <- `Accurate Mass [M+H]+`
+    
+    match <- match_near_mz_obs_with_tolerance(
+      mz_obs = mz_obs,
+      mode = "pos",
+      compounds = combined_compounds,
+      initial_ppm = 0,
+      max_ppm = 200,
+      step = 1
+    )
+    
+    # Ajouter les infos d’origine
+    match$Analyte <- Analyte
+    match$KB_FO_name <- KB_FO_name
+    
+    match %>%
+      select(Analyte, KB_FO_name, mz_obs, mz_theo, ppm_error_value, ppm_used)
+  }
+)
+View(study_case_extended)
+
+```
+
+🔎 This table provides a basis for validating predicted adducts against experimental results, enabling a practical assessment of the computational pipeline’s relevance and accuracy.
